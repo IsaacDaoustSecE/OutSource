@@ -1,4 +1,4 @@
-# John Freelance
+# OutSource
 
 A freelancing website where users can hire for jobs
 
