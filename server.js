@@ -1,8 +1,6 @@
 const express = require("express");
-const { productsRoute } = require("./modules/products/products-routes");
 const connectDB = require("./shared/middlewares/connect-db");
-const { customersRoute } = require("./modules/customers/customers-routes");
-const { cartsRoute } = require("./modules/carts/carts-routes");
+const { usersRoute } = require("./modules/users/users-routes");
 
 const port = 3000;
 const hostname = "localhost";
