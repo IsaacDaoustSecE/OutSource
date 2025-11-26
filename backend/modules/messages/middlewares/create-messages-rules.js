@@ -11,6 +11,10 @@ const createUserRules = [
         .isString()
         .notEmpty()
         .withMessage("to_user must be a valid email address"),
+    body("text")
+        .isString()
+        .notEmpty()
+        .withMessage("text must be included to send a message"),
 
     checkValidation,
 ];

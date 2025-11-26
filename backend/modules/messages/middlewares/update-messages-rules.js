@@ -11,6 +11,10 @@ const updateCustomerRules = [
         .isString()
         .optional()
         .withMessage("to_user must be a valid email address"),
+    body("text")
+        .isString()
+        .optional()
+        .withMessage("text must be included to send a message"),
 
     checkValidation,
 ];
