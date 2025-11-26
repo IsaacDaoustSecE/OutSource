@@ -1,0 +1,14 @@
+[
+  {
+    "user_id": 1,
+    "skills": ["JavaScript", "React", "Node.js"],
+    "field": "Web Development",
+    "jobs": [1, 2]
+  },
+  {
+    "user_id": 2,
+    "skills": ["Graphic Design", "Photoshop", "Illustrator"],
+    "field": "Design",
+    "jobs": [3]
+  }
+]
