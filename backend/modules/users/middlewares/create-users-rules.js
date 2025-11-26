@@ -1,5 +1,5 @@
 const { body } = require("express-validator");
-const checkValidation = require("../../../shared/middlewares/check-validation");
+const checkValidation = require("../../../middlewares/check-validation");
 
 const createUserRules = [
     body("name").isString().withMessage("Name must be a string").trim(),
