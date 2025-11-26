@@ -1,11 +1,14 @@
 const express = require("express");
 const connectDB = require("./shared/middlewares/connect-db");
 const { usersRoute } = require("./modules/users/users-routes");
+const cors = require("cors");
 
 const port = 3000;
 const hostname = "localhost";
 
 const server = express();
+
+server.use(cors());
 
 // built-in middlewares to parse request body in application-level
 server.use(express.json());
@@ -14,6 +17,11 @@ server.use(express.urlencoded({ extended: true }));
 server.use(connectDB);
 // Mount all the routes
 server.use(usersRoute);
+server.use(freelancersRoute);
+server.use(jobsRoute);
+server.use(ordersRoute);
+server.use(messagesRoute);
+server.use(ordersRoute);
 
 // error-handling middleware to logs the error for debugging.
 server.use((error, req, res, next) => {
