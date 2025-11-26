@@ -1,9 +1,7 @@
-import React from 'react'
 import { useEffect } from "react";
 
-
 useEffect(() => {
-    fetch("http://localhost:3000/jobs")
+    fetch("http://localhost:3000/users")
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -14,17 +12,18 @@ useEffect(() => {
         setFetchedProducts(data);
       })
       .catch((error) => {
-        console.error("Error fetching jobs:", error);
+        console.error("Error fetching users:", error);
       })
       .finally(() => {});
   }, []);
 
-const Jobs = () => {
-  return (
-    <div id = "jobs-page">
-      
-    </div>
-  )
-}
-
-export default Jobs
+ const users = () => {
+   return (
+     <div id = "account-page">
+        
+      </div>
+   )
+ }
+ 
+ export default test
+ 

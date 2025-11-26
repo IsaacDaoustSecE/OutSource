@@ -3,7 +3,7 @@ import { useEffect } from "react";
 
 
 useEffect(() => {
-    fetch("http://localhost:3000/jobs")
+    fetch("http://localhost:3000/notifications")
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -14,17 +14,17 @@ useEffect(() => {
         setFetchedProducts(data);
       })
       .catch((error) => {
-        console.error("Error fetching jobs:", error);
+        console.error("Error fetching notifications:", error);
       })
       .finally(() => {});
   }, []);
 
-const Jobs = () => {
+const notification = () => {
   return (
-    <div id = "jobs-page">
+    <div>
       
     </div>
   )
 }
 
-export default Jobs
+export default notification
