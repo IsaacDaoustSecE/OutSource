@@ -30,7 +30,7 @@ server.use((error, req, res, next) => {
 });
 
 // Middleware to handle route not found error.
-server.use((req, res, ) => {
+server.use((req, res, next) => {
     res.status(404).send(`404! ${req.method} ${req.path} Not Found.`);
 });
 
