@@ -5,7 +5,7 @@ import Drawing from "./assets/drawing.png";
 export default function App() {
   return (
     <div className="page-container">
-      {/* LEFT SIDE */}
+
       <div className="left-column">
         <h1 className="title">OutSource</h1>
 
@@ -38,15 +38,12 @@ export default function App() {
         />
       </div>
 
-      {/* RIGHT SIDE */}
       <div className="image-container">
         <img src={Drawing} alt="Illustration" className="illustration" />
       </div>
     </div>
   );
 }
-
-/* ---- COMPONENTS ---- */
 
 function SectionTitle({ title, time }) {
   return (

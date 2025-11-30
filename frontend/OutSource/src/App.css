@@ -1,4 +1,4 @@
-/* General Layout */
+
 .page-container {
   background-color: #4a2315;
   min-height: 100vh;
@@ -6,24 +6,24 @@
   padding: 60px;
   display: flex;
   justify-content: space-between;
-  align-items: stretch;      /* ensures columns stretch full height */
-  width: 100%;               /* full width of the screen */
-  box-sizing: border-box;    /* include padding in width calculation */
+  align-items: stretch;      
+  width: 100%;               
+  box-sizing: border-box;    
 }
 
-/* Left Column */
+
 .left-column {
   max-width: 480px;
-  flex: 1;                   /* allow left column to grow */
+  flex: 1;                   
 }
 
-/* Title */
+
 .title {
   font-size: 44px;
   font-weight: 700;
 }
 
-/* Navigation */
+
 .nav {
   display: flex;
   gap: 20px;
@@ -38,7 +38,7 @@
   opacity: 0.9;
 }
 
-/* Section Titles */
+
 .section-title {
   margin-bottom: 10px;
 }
@@ -62,7 +62,7 @@
   opacity: 0.7;
 }
 
-/* Cards */
+
 .card {
   border: 1px solid rgba(255, 255, 255, 0.1);
   padding: 14px;
@@ -81,9 +81,9 @@
   margin-top: 4px;
 }
 
-/* Right Column / Image */
+
 .image-container {
-  flex: 1;                   /* allow right column to grow */
+  flex: 1;                  
   display: flex;
   justify-content: center;
   align-items: center;
