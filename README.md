@@ -7,6 +7,15 @@ A freelancing website where users can hire for jobs
 CPAN 212 ONH
 Deven Lall, Isaac Daoust
 
+### Phase 4
+
+#### Deven
+- Setup React frontend and split from backend
+- Implement home page
+
+#### Isaac
+- Connect frontend home page with backend to list jobs and freelancers from the database using fetch
+
 ## Possible Data Models
 
 ### User
