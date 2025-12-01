@@ -1,6 +1,12 @@
 const express = require("express");
 const connectDB = require("./shared/middlewares/connect-db");
 const { usersRoute } = require("./modules/users/users-routes");
+const {
+    freelancersRoute,
+} = require("./modules/freelancers/freelancers-routes");
+const { jobsRoute } = require("./modules/jobs/jobs-routes");
+const { messagesRoute } = require("./modules/messages/messages-routes");
+const { ordersRoute } = require("./modules/orders/orders-routes");
 const cors = require("cors");
 
 const port = 3000;

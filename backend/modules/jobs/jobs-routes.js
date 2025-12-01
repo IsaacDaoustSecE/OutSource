@@ -6,7 +6,12 @@ const jobModel = require("./jobs-model");
 const jobsRoute = Router();
 
 jobsRoute.get("/jobs", async (req, res) => {
-    const alljobs = await jobModel.find();
+    const alljobs = await jobModel.find().populate({
+        path: "freelancer",
+        populate: {
+            path: "user",
+        },
+    });
 
     res.json(alljobs ? alljobs : []);
 });

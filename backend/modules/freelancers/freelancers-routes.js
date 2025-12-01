@@ -2,11 +2,15 @@ const { Router } = require("express");
 const createFreelancerRules = require("./middlewares/create-freelancers-rules");
 const updateFreelancerRules = require("./middlewares/update-freelancers-rules");
 const FreelancerModel = require("./freelancers-model");
+const mongoose = require("mongoose");
 
 const freelancersRoute = Router();
 
 freelancersRoute.get("/freelancers", async (req, res) => {
-    const allFreelancers = await FreelancerModel.find();
+    const allFreelancers = await FreelancerModel.find().populate([
+        "user",
+        "jobs",
+    ]);
 
     res.json(allFreelancers ? allFreelancers : []);
 });

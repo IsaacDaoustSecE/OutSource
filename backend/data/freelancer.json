@@ -1,14 +1,14 @@
 [
-  {
-    "user_id": 1,
-    "skills": ["JavaScript", "React", "Node.js"],
-    "field": "Web Development",
-    "jobs": [1, 2]
-  },
-  {
-    "user_id": 2,
-    "skills": ["Graphic Design", "Photoshop", "Illustrator"],
-    "field": "Design",
-    "jobs": [3]
-  }
+    {
+        "user": 1,
+        "skills": "Graphic Design, Figma, Photoshop",
+        "field": "Design",
+        "jobs": []
+    },
+    {
+        "user": 2,
+        "skills": "Software Development, MySQL, React",
+        "field": "Software",
+        "jobs": []
+    }
 ]
