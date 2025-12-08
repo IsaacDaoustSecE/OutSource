@@ -119,42 +119,38 @@ usersRoute.get("/users", authorize(["admin"]), async (req, res) => {
 /**
  * Get user by id Route
  */
-usersRoute.get(
-    "/accounts/:id",
-    authorize(["admin", "user"]),
-    async (req, res) => {
-        const userID = req.params.id;
-        const isAdmin = req.account.role === "admin";
+usersRoute.get("/users/:id", authorize(["admin", "user"]), async (req, res) => {
+    const userID = req.params.id;
+    const isAdmin = req.user.role === "admin";
 
-        // If not admin, don't allow to access others account
-        if (!isAdmin && userID !== req.account.id) {
-            return res.status(401).send({
-                errorMessage: `You cannot access other user's information`,
-            });
-        }
-
-        const foundUser = await UserModel.findById(userID);
-        if (!foundUser) {
-            return res
-                .status(404)
-                .json({ errorMessage: `User with ${userID} doesn't exist` });
-        }
-        res.json(foundUser);
+    // If not admin, don't allow to access others account
+    if (!isAdmin && userID !== req.user.id) {
+        return res.status(401).send({
+            errorMessage: `You cannot access other user's information`,
+        });
     }
-);
+
+    const foundUser = await UserModel.findById(userID);
+    if (!foundUser) {
+        return res
+            .status(404)
+            .json({ errorMessage: `User with ${userID} doesn't exist` });
+    }
+    res.json(foundUser);
+});
 
 /**
  * Update user Route
  */
 usersRoute.put(
-    "/accounts/:id",
+    "/users/:id",
     [updateUserRules, authorize(["admin", "user"])],
     async (req, res) => {
         const userID = req.params.id;
-        const isAdmin = req.account.role === "admin";
+        const isAdmin = req.user.role === "admin";
 
         // If not admin, don't allow to update others account
-        if (!isAdmin && req.params.id !== req.account.id) {
+        if (!isAdmin && req.params.id !== req.user.id) {
             return res.status(401).json({
                 errorMessage:
                     "You don't have permission to update other user's accounts.",
@@ -201,7 +197,7 @@ usersRoute.put(
 /**
  * Delete user Route
  */
-usersRoute.delete("/accounts/:id", authorize(["admin"]), async (req, res) => {
+usersRoute.delete("/users/:id", authorize(["admin"]), async (req, res) => {
     const userID = req.params.id;
     const foundUser = await UserModel.findById(userID);
 

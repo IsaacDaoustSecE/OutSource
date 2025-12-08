@@ -32,7 +32,8 @@ function authorize(requiredRoles = ["user"]) {
 
             for (const role of requiredRoles) {
                 if (authStrategies[role](decoded)) {
-                    req.account = decoded;
+                    req.user = decoded;
+                    req.user.id = decoded._id;
                     return next();
                 }
             }

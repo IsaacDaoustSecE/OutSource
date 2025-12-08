@@ -1,4 +1,9 @@
+// Import and configure the 'dotenv' package at the top of server.js to load environment variables.
+require("dotenv").config();
+
 const express = require("express");
+const cors = require("cors");
+const cookieParser = require("cookie-parser");
 const connectDB = require("./shared/middlewares/connect-db");
 const { usersRoute } = require("./modules/users/users-routes");
 const {
@@ -7,7 +12,6 @@ const {
 const { jobsRoute } = require("./modules/jobs/jobs-routes");
 const { messagesRoute } = require("./modules/messages/messages-routes");
 const { ordersRoute } = require("./modules/orders/orders-routes");
-const cors = require("cors");
 
 const port = 3000;
 const hostname = "localhost";
@@ -20,7 +24,12 @@ server.use(cors());
 server.use(express.json());
 server.use(express.urlencoded({ extended: true }));
 
+// middlewares to parse request cookies in application-level
+server.use(cookieParser());
+
+// Add the connectDB middleware in application-level, before defining routes.
 server.use(connectDB);
+
 // Mount all the routes
 server.use(usersRoute);
 server.use(freelancersRoute);
