@@ -1,121 +1,226 @@
 const { Router } = require("express");
-const createUserRules = require("./middlewares/create-users-rules");
-const updateUserRules = require("./middlewares/update-users-rules");
-const UserModel = require("./users-model");
+const registerRules = require("./middlewares/register-rules");
+const loginRules = require("./middlewares/login-rules");
 
-// Create a new Express router instance
+const UserModel = require("./users-model");
+const { matchPassword } = require("../../shared/password-utils");
+const { encodeToken } = require("../../shared/jwt-utils");
+const { randomNumberOfNDigits } = require("../../shared/compute-utils");
+const authorize = require("../../shared/middlewares/authorize");
+const verifyLoginRules = require("./middlewares/verify-login-rules");
+const updateUserRules = require("./middlewares/update-user-rules");
+const sendEmail = require("../../shared/email-utils");
+
+const OTPModel = require("./otp-model");
+
 const usersRoute = Router();
 
 /**
- * GET /users
- * Returns a list of all users
+ * Register Route
  */
-usersRoute.get("/users", async (req, res) => {
-    const allUsers = await UserModel.find();
-    // Return users or an empty array if none found
-    res.json(allUsers ? allUsers : []);
-});
-
-/**
- * GET /users/:id
- * Returns a single user by ID
- */
-usersRoute.get("/users/:id", async (req, res) => {
-    const id = req.params.id;
-
-    try {
-        const maybeUser = await UserModel.findById(id);
-
-        if (!maybeUser) {
-            // If no user found, respond with 404
-            res.status(404).send("User not found");
-        } else {
-            res.status(200).json(maybeUser);
-        }
-    } catch (e) {
-        // Catch invalid ObjectId errors or DB issues
-        res.status(500).send("Unable to get user by id");
+usersRoute.post("/users/register", registerRules, async (req, res) => {
+    const newUser = req.body;
+    const existingUser = await UserModel.findOne({
+        email: newUser.email,
+    });
+    if (existingUser) {
+        return res.status(500).json({
+            errorMessage: `User with ${newUser.email} already exist`,
+        });
     }
+    const addedUser = await UserModel.create(newUser);
+    if (!addedUser) {
+        return res.status(500).send({
+            errorMessage: `Oops! User couldn't be added!`,
+        });
+    }
+    const user = { ...addedUser.toJSON(), password: undefined };
+    res.json(user);
 });
 
 /**
- * POST /users
- * Creates a new user
- * Uses validation middleware: createUserRules
+ * Login Route
  */
-usersRoute.post("/users", createUserRules, async (req, res) => {
+usersRoute.post("/users/login", loginRules, async (req, res) => {
+    const { email, password } = req.body;
+    const foundUser = await UserModel.findOne({ email });
+    if (!foundUser) {
+        return res.status(404).send({
+            errorMessage: `User with ${email} doesn't exist`,
+        });
+    }
+    const passwordMatched = matchPassword(password, foundUser.password);
+    if (!passwordMatched) {
+        return res.status(401).send({
+            errorMessage: `Email and password didn't matched`,
+        });
+    }
+
+    const foundOtp = await OTPModel.findOne({ email });
+
+    if (foundOtp) {
+        return res.status(200).send("Email already sent");
+    }
+
+    const otp = randomNumberOfNDigits(6);
+
     try {
-        const newUser = await UserModel.create({
-            ...req.body,
+        await OTPModel.create({
+            email,
+            otp,
         });
 
-        res.status(200).json(newUser);
+        await sendEmail(
+            email,
+            "Lab 8 OTP",
+            "Hello! Your One Time Password to login is: " + otp
+        );
+        return res.status(200).send("Email sent");
     } catch (e) {
-        // Handle validation or DB errors
-        res.status(500).send("Unable to add user");
+        console.error("Error while sending email: " + e);
+        return res.status(500).send("Error while sending email");
     }
 });
 
 /**
- * PUT /users/:id
- * Updates an existing user
- * Uses validation middleware: updateUserRules
+ * Verify Login Route
  */
-usersRoute.put("/users/:id", updateUserRules, async (req, res) => {
-    const userId = req.params.id;
+usersRoute.post("/users/verify-login", verifyLoginRules, async (req, res) => {
+    const { email, otp } = req.body;
 
-    try {
-        // Check if user exists before attempting update
-        const userExists = await UserModel.exists({ _id: userId });
+    const foundOtp = await OTPModel.findOne({ email, otp });
 
-        if (!userExists) {
-            res.status(404).send("User not found");
-        } else {
-            const updatedUser = await UserModel.findByIdAndUpdate(
-                userId,
-                req.body,
-                { new: true } // return updated document
-            );
-
-            if (!updatedUser) {
-                res.status(500).send("Unable to update user");
-            } else {
-                res.status(200).json(updatedUser);
-            }
-        }
-    } catch (e) {
-        res.status(500).send("Unable to update user");
+    if (!foundOtp) {
+        return res.status(401).send({
+            errorMessage: `Verification failed`,
+        });
     }
+
+    // Use lean to turn model into plain object for storage in JWT
+    // without it, it complains about needing a plain object
+    const user = await UserModel.findOne({ email }).lean();
+    console.log("USER", user);
+
+    // generate access token
+    const token = encodeToken(user);
+    res.cookie("Authorization", "Bearer " + token);
+    res.json({ user, token });
 });
 
 /**
- * DELETE /users/:id
- * Deletes a user by ID
+ * Get all users Route
  */
-usersRoute.delete("/users/:id", async (req, res) => {
-    const userId = req.params.id;
+usersRoute.get("/users", authorize(["admin"]), async (req, res) => {
+    const allUsers = await UserModel.find().select("-password");
+    if (!allUsers) res.send([]);
+    res.json(allUsers);
+});
 
-    try {
-        // Check if user exists
-        const maybeUser = await UserModel.findById(userId);
+/**
+ * Get user by id Route
+ */
+usersRoute.get(
+    "/accounts/:id",
+    authorize(["admin", "user"]),
+    async (req, res) => {
+        const userID = req.params.id;
+        const isAdmin = req.account.role === "admin";
 
-        if (!maybeUser) {
-            res.status(404).send("User not found");
-        } else {
-            const deletedUser = await UserModel.deleteOne({
-                _id: userId,
+        // If not admin, don't allow to access others account
+        if (!isAdmin && userID !== req.account.id) {
+            return res.status(401).send({
+                errorMessage: `You cannot access other user's information`,
             });
-
-            if (!deletedUser) {
-                res.status(500).send("Unable to delete user");
-            } else {
-                // Return deleted user data
-                res.status(200).json(maybeUser);
-            }
         }
-    } catch (e) {
-        res.status(500).send("Unable to delete user");
+
+        const foundUser = await UserModel.findById(userID);
+        if (!foundUser) {
+            return res
+                .status(404)
+                .json({ errorMessage: `User with ${userID} doesn't exist` });
+        }
+        res.json(foundUser);
     }
+);
+
+/**
+ * Update user Route
+ */
+usersRoute.put(
+    "/accounts/:id",
+    [updateUserRules, authorize(["admin", "user"])],
+    async (req, res) => {
+        const userID = req.params.id;
+        const isAdmin = req.account.role === "admin";
+
+        // If not admin, don't allow to update others account
+        if (!isAdmin && req.params.id !== req.account.id) {
+            return res.status(401).json({
+                errorMessage:
+                    "You don't have permission to update other user's accounts.",
+            });
+        }
+
+        const newUser = req.body;
+        if (!newUser) {
+            return res.status(421).json({ errorMessage: "Nothing to update" });
+        }
+
+        // Only allow admin to change the roles
+        if (!isAdmin && newUser.roles) {
+            return res.status(401).json({
+                errorMessage:
+                    "You don't have permission to update your role. Please contact the support team for the assistance!",
+            });
+        }
+
+        const foundUser = await UserModel.findById(userID);
+        if (!foundUser) {
+            return res
+                .status(404)
+                .send({ errorMessage: `User with ${userID} doesn't exist` });
+        }
+
+        const updatedUser = await UserModel.findByIdAndUpdate(
+            userID,
+            {
+                $set: newUser,
+            },
+            { new: true }
+        ).select("-password");
+
+        if (!updatedUser) {
+            return res
+                .status(500)
+                .send({ errorMessage: `Oops! User couldn't be updated!` });
+        }
+        res.json(updatedUser);
+    }
+);
+
+/**
+ * Delete user Route
+ */
+usersRoute.delete("/accounts/:id", authorize(["admin"]), async (req, res) => {
+    const userID = req.params.id;
+    const foundUser = await UserModel.findById(userID);
+
+    if (!foundUser) {
+        return res
+            .status(404)
+            .send({ errorMessage: `User with ${userID} doesn't exist` });
+    }
+
+    const deletedUser =
+        await UserModel.findByIdAndDelete(userID).select("-password");
+
+    if (!deletedUser) {
+        return res
+            .status(500)
+            .send({ errorMessage: `Oops! User couldn't be deleted!` });
+    }
+
+    res.json(deletedUser);
 });
 
 module.exports = { usersRoute };

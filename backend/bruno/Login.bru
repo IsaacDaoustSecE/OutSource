@@ -1,0 +1,21 @@
+meta {
+  name: Login
+  type: http
+  seq: 2
+}
+
+post {
+  url: http://localhost:3000/users/login
+  body: formUrlEncoded
+  auth: inherit
+}
+
+body:form-urlencoded {
+  email: isaacd20015@gmail.com
+  password: dogs4788
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

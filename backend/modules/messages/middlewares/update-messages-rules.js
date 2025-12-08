@@ -1,7 +1,7 @@
 const { body } = require("express-validator");
 const checkValidation = require("../../../shared/middlewares/check-validation");
 
-const updateCustomerRules = [
+const updateUserRules = [
     body("from_user")
         .isString()
         .optional()
@@ -19,4 +19,4 @@ const updateCustomerRules = [
     checkValidation,
 ];
 
-module.exports = updateCustomerRules;
+module.exports = updateUserRules;

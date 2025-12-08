@@ -1,0 +1,21 @@
+meta {
+  name: Verify OTP
+  type: http
+  seq: 5
+}
+
+post {
+  url: http://localhost:3000/users/verify-login
+  body: formUrlEncoded
+  auth: inherit
+}
+
+body:form-urlencoded {
+  email: isaacd20015@gmail.com
+  otp: 626010
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

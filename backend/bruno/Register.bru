@@ -1,0 +1,24 @@
+meta {
+  name: Register
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://localhost:3000/users/register
+  body: formUrlEncoded
+  auth: inherit
+}
+
+body:form-urlencoded {
+  name: Warren
+  email: isaacd20015@gmail.com
+  password: dogs4788
+  phone: 701-333-3929
+  address: 177 Powell
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
