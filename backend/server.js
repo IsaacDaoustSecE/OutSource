@@ -37,7 +37,7 @@ server.use(jobsRoute);
 server.use(ordersRoute);
 server.use(messagesRoute);
 server.use(ordersRoute);
-
+server.use(authRoute);
 // error-handling middleware to logs the error for debugging.
 server.use((error, req, res, next) => {
     console.log(error);
