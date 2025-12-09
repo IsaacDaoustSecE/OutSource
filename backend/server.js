@@ -12,6 +12,7 @@ const {
 const { jobsRoute } = require("./modules/jobs/jobs-routes");
 const { messagesRoute } = require("./modules/messages/messages-routes");
 const { ordersRoute } = require("./modules/orders/orders-routes");
+const {oauthRoutes} = require("./modules/auth/GoogAuth-routes");
 
 const port = 3000;
 const hostname = "localhost";
@@ -37,7 +38,7 @@ server.use(jobsRoute);
 server.use(ordersRoute);
 server.use(messagesRoute);
 server.use(ordersRoute);
-server.use(authRoute);
+server.use(oauthRoutes);
 // error-handling middleware to logs the error for debugging.
 server.use((error, req, res, next) => {
     console.log(error);
