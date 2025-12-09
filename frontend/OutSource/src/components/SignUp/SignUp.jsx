@@ -1,20 +1,49 @@
-import { useState } from 'react';
-import './Signup.css';
-import drawing from '../../assets/drawing.png';
+import { useState, useEffect, useCallback, } from "react";
+import { useNavigate } from "react-router-dom";
+import "./Signup.css";
+import drawing from "../../assets/drawing.png";
+import useApi from "../../shared/useapi.js";
 
 const SignUp = () => {
-  const [fullName, setFullName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log({
-      fullName,
-      email,
-      password
+  const [form, setForm] = useState({
+    fullName: "",
+    email: "",
+    password: "",
+  });
+
+  const { loading, data, error, formError, refetch } = useApi(
+    "/users/register",
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+    },
+    { auto: false }
+  );
+
+  // Redirect to OTP page
+  useEffect(() => {
+    if (!data) return;
+
+    // navigate to /otp
+    navigate("/otp", {
+      state: { email: form.email },
     });
+  }, [data, form.email, navigate]);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setForm({ ...form, [name]: value });
   };
+
+  const handleSubmit = useCallback(
+    (e) => {
+      e.preventDefault();
+      refetch(form); // submit to backend
+    },
+    [form]
+  );
 
   return (
     <div className="SignUp-container">
@@ -25,30 +54,51 @@ const SignUp = () => {
         <form className="SignUp-form" onSubmit={handleSubmit}>
           <h2>Sign Up</h2>
           <h3>Join the marketplace where work finds you</h3>
+          
+          <div
+            className="error"
+            style={{ display: error ? "block" : "none", marginBottom: "20px" }}
+          >
+            <p>{error}</p>
+            <ul style={{ display: formError?.length ? "block" : "none" }}>
+              {formError?.map((e, i) => (
+                <li key={i}>{e.message}</li>
+              ))}
+            </ul>
+          </div>
 
           <label>Full Name</label>
           <input
             type="text"
-            value={fullName}
-            onChange={(e) => setFullName(e.target.value)}
+            name="fullName"
+            value={form.fullName}
+            onChange={handleChange}
+            disabled={loading}
+            required
           />
 
           <label>Email</label>
           <input
             type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            name="email"
+            value={form.email}
+            onChange={handleChange}
+            disabled={loading}
+            required
           />
 
           <label>Password</label>
           <input
             type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            name="password"
+            value={form.password}
+            onChange={handleChange}
+            disabled={loading}
+            required
           />
 
-          <button type="submit" className="CreateAcc-btn">
-            Create Account
+          <button type="submit" className="CreateAcc-btn" disabled={loading}>
+            {loading ? "Creating Account..." : "Create Account"}
           </button>
         </form>
       </div>
