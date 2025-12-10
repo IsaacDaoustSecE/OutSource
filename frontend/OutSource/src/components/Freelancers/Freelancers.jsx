@@ -6,9 +6,9 @@ import { useNavigate } from "react-router-dom";
 import drawing from "../../assets/drawing.png";
 import useApi from "../../shared/useapi.js";
 import Header from "../Header/Header.jsx";
+import { Warren } from "../Warren.jsx";
 
-export function Freelancer({ freelancer }) {
-    console.log(freelancer);
+export function FreelancerCard({ freelancer }) {
     return (
         <Card
             headerLeft={freelancer.user.name}
@@ -80,7 +80,7 @@ export default function Freelancers() {
                 {data &&
                     data.map((freelancer) => {
                         return (
-                            <Freelancer
+                            <FreelancerCard
                                 key={freelancer._id}
                                 freelancer={freelancer}
                             />
@@ -88,9 +88,7 @@ export default function Freelancers() {
                     })}
             </div>
 
-            <div className="right-section">
-                <img src={drawing} alt="drawing" />
-            </div>
+            <Warren />
         </div>
     );
 }

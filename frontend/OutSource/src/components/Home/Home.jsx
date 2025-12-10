@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import drawing from "../../assets/drawing.png";
 import "./Home.css";
-import { Freelancer } from "../Freelancers/Freelancers";
+import { FreelancerCard } from "../Freelancers/Freelancers";
 import { Job } from "../Jobs/Jobs";
 import Header from "../Header/Header";
+import { Warren } from "../Warren";
 
 const BASE = "http://localhost:3000";
 
@@ -54,16 +55,15 @@ export default function Home() {
                 </div>
 
                 {freelancers.map((freelancer) => (
-                    <Freelancer key={freelancer._id} freelancer={freelancer} />
+                    <FreelancerCard
+                        key={freelancer._id}
+                        freelancer={freelancer}
+                    />
                 ))}
             </div>
 
             <div className="right-section">
-                <img
-                    src={drawing}
-                    alt="Illustration"
-                    className="illustration"
-                />
+                <Warren />
             </div>
         </div>
     );

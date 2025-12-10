@@ -7,6 +7,7 @@ import Jobs from "./components/Jobs/Jobs.jsx";
 import Freelancers from "./components/Freelancers/Freelancers.jsx";
 import Home from "./components/Home/Home.jsx";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Freelancer from "./components/Freelancer/Freelancer.jsx";
 
 import "./App.css";
 
@@ -21,6 +22,7 @@ function App() {
                     <Route path="/messages" element={<Messages />} />
                     <Route path="/jobs" element={<Jobs />} />
                     <Route path="/freelancers" element={<Freelancers />} />
+                    <Route path="/freelancers/*" element={<Freelancer />} />
                 </Routes>
             </BrowserRouter>
         </div>

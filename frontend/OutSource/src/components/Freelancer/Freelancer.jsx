@@ -1,4 +1,4 @@
-import styles from "./Jobs.module.css";
+import styles from "./Freelancer.module.css";
 import Card from "../Card/Card.jsx";
 import { Warren } from "../Warren.jsx";
 
@@ -24,26 +24,9 @@ import { useNavigate } from "react-router-dom";
 import drawing from "../../assets/drawing.png";
 import useApi from "../../shared/useapi.js";
 import Header from "../Header/Header.jsx";
+import { Job } from "../Jobs/Jobs.jsx";
 
-export function Job({ job }) {
-    console.log(job);
-    return (
-        <Card
-            headerLeft={job.title}
-            headerRight={"$" + job.price}
-            underHeader={job.freelancer.user.name}
-            text={job.description}
-            footerLeft={
-                <span>
-                    Estimated duration: {job.expected_duration_days} day(s)
-                </span>
-            }
-            footerRight={<span>Order</span>}
-        />
-    );
-}
-
-export default function Jobs() {
+export default function Freelancer() {
     // const navigate = useNavigate();
 
     // const [form, setForm] = useState({
@@ -52,7 +35,10 @@ export default function Jobs() {
     //     password: "",
     // });
 
-    const { loading, data, error, formError, refetch } = useApi("/jobs", {
+    // TODO: Change this to the url param id
+    const id = "692d08cf3707ae2c5bf25366";
+
+    const { data, loading, refetch } = useApi("/freelancers/" + id, {
         method: "GET",
         headers: { "Content-Type": "application/json" },
     });
@@ -91,9 +77,19 @@ export default function Jobs() {
             <div className="left-section">
                 <Header />
 
-                <h2>Jobs</h2>
+                {data && (
+                    <>
+                        <h2>{data.user.name}</h2>
+                        <p>{data.field}</p>
+                        <hr></hr>
+                        <p>{data.bio}</p>
+                    </>
+                )}
+
+                <h3>Jobs</h3>
                 {data &&
-                    data.map((job) => {
+                    data.jobs.map((job) => {
+                        job.freelancer = data;
                         return <Job key={job._id} job={job} />;
                     })}
             </div>
