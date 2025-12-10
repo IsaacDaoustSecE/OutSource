@@ -3,7 +3,6 @@ import useScroll from "../useScroll";
 
 export function Warren() {
     const scrollPosition = useScroll();
-    console.log(scrollPosition);
 
     return (
         <div className="right-section">

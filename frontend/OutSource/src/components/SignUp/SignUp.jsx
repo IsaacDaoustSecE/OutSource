@@ -77,7 +77,7 @@ const SignUp = () => {
                     <label>Full Name</label>
                     <input
                         type="text"
-                        name="FullName"
+                        name="fullName"
                         value={form.fullName}
                         onChange={handleChange}
                         disabled={loading}
@@ -119,8 +119,10 @@ const SignUp = () => {
                             className="Login-btn"
                             disabled={loading}
                             onClick={() => navigate("/Login")}
-                            >
-                           {loading ? "Going to Login Page": "Already have an account? Log In"} 
+                        >
+                            {loading
+                                ? "Going to Login Page"
+                                : "Already have an account? Log In"}
                         </button>
                     </div>
                 </form>

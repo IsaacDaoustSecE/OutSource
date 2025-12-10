@@ -22,7 +22,9 @@ function Reply({ userName, onCancel, onSend }) {
                 // text={text}
                 footerRight={
                     <div className={styles.actions}>
-                        <button onClick={onCancel}>cancel</button>
+                        <button type="button" onClick={onCancel}>
+                            cancel
+                        </button>
                         <button onClick={onSend}>send</button>
                     </div>
                 }
