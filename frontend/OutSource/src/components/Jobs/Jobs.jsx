@@ -51,13 +51,10 @@ export default function Jobs() {
     //     password: "",
     // });
 
-    const { loading, data, error, formError, refetch } = useApi(
-        "http://localhost:3000/jobs/",
-        {
-            method: "GET",
-            headers: { "Content-Type": "application/json" },
-        }
-    );
+    const { loading, data, error, formError, refetch } = useApi("/jobs", {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+    });
 
     // useEffect(() => {
     //     // refetch();

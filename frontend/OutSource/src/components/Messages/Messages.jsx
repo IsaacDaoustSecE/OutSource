@@ -20,7 +20,7 @@ export default function Messages() {
     const id = "693628716344bde4f9920cca";
 
     const { loading, data, error, formError, refetch } = useApi(
-        "http://localhost:3000/messages/user/" + id,
+        "/messages/user/" + id,
         {
             method: "GET",
             headers: { "Content-Type": "application/json" },

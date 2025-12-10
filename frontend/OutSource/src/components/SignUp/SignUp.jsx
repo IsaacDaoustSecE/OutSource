@@ -43,7 +43,7 @@ const SignUp = () => {
             e.preventDefault();
             refetch(form); // submit to backend
         },
-        [form]
+        [form, refetch]
     );
 
     return (

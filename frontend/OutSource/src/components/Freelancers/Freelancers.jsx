@@ -35,7 +35,7 @@ export default function Freelancers() {
     // });
 
     const { loading, data, error, formError, refetch } = useApi(
-        "http://localhost:3000/freelancers",
+        "/freelancers",
         {
             method: "GET",
             headers: { "Content-Type": "application/json" },
