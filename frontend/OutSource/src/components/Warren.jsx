@@ -12,7 +12,7 @@ export function Warren() {
                 alt="drawing"
                 style={{
                     transform: `translateY(${scrollPosition}px)`,
-                    transition: "250ms transform",
+                    transition: "1s transform",
                 }}
             />
         </div>

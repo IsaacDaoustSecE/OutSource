@@ -40,7 +40,7 @@ function Nav({ selectedRoute }) {
             </Link>
             <Link
                 className={
-                    location.pathname.endsWith("/freelancers")
+                    location.pathname.startsWith("/freelancers")
                         ? styles.selectedRoute
                         : undefined
                 }
@@ -56,7 +56,9 @@ export default function Header({ showLinks = true }) {
     return (
         <header className={styles.root}>
             <h1 className="title">OutSource</h1>
-            <p className={styles.subtitle}>Hire talent. Get hired. All in one place.</p>
+            <p className={styles.subtitle}>
+                Hire talent. Get hired. All in one place.
+            </p>
             {showLinks && <Nav />}
         </header>
     );
