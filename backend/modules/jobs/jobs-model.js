@@ -6,6 +6,7 @@ const jobSchema = new mongoose.Schema({
     price: { type: Number, required: true },
     expected_duration_days: { type: Number, required: true },
     createdAt: { type: mongoose.Schema.Types.Date, default: Date.now() },
+    description:{type: String, required: true },
 });
 
 const JobModel = mongoose.model("Job", jobSchema);
