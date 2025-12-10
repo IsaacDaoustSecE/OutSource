@@ -10,7 +10,7 @@ function Nav({ selectedRoute }) {
         <nav className={styles.nav}>
             <Link
                 className={
-                    location.pathname.endsWith("/")
+                    location.pathname.endsWith("/Home")
                         ? styles.selectedRoute
                         : undefined
                 }

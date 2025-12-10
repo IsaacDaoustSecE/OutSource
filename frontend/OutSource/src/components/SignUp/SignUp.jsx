@@ -49,7 +49,7 @@ const SignUp = () => {
     return (
         <div className="content-container">
             <div className="left-section">
-                <Header showLinks={false} />
+                <Header />
 
                 <form className="SignUp-form" onSubmit={handleSubmit}>
                     <h2>Sign Up</h2>
@@ -77,7 +77,7 @@ const SignUp = () => {
                     <label>Full Name</label>
                     <input
                         type="text"
-                        name="FullName"
+                        name="fullName"
                         value={form.fullName}
                         onChange={handleChange}
                         disabled={loading}

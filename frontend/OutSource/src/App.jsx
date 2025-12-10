@@ -9,6 +9,7 @@ import Home from "./components/Home/Home.jsx";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Freelancer from "./components/Freelancer/Freelancer.jsx";
 import Login from "./components/Login/Login.jsx";
+import JobPosting from "./components/JobPosting/JobPosting.jsx";
 import "./App.css";
 
 
@@ -25,6 +26,7 @@ function App() {
                     <Route path="/jobs" element={<Jobs />} />
                     <Route path="/freelancers" element={<Freelancers />} />
                     <Route path="/freelancers/*" element={<Freelancer />} />
+                    <Route path="/JobPosting" element={<JobPosting />} />
                 </Routes>
             </BrowserRouter>
         </div>

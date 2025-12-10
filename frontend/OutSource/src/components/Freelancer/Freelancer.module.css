@@ -1,0 +1,20 @@
+.JobPost-btn{
+    background: #c8ad55;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    color: black;
+}
+.JobPost-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #4c2719;
+    width: 100%;
+    min-height: 100vh;
+    padding: 0 40px;
+    color: white;
+    gap: 80px;
+}
