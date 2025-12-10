@@ -117,6 +117,11 @@ usersRoute.post("/users/login", loginRules, async (req, res) => {
     }
 });
 
+usersRoute.post("/users/logout", async (req, res) => {
+    res.clearCookie("Authorization");
+    res.json({ success: true });
+});
+
 /**
  * Verify Login Route
  */
@@ -165,6 +170,7 @@ usersRoute.get("/users", authorize(["admin"]), async (req, res) => {
  */
 usersRoute.get("/users/me", authorize(["admin", "user"]), async (req, res) => {
     const userId = req.user.id;
+    console.log("me id:", userId, req.cookies);
 
     const foundUser = await UserModel.findById(userId);
     if (!foundUser) {
