@@ -9,6 +9,7 @@ const createUserRules = [
         .trim(),
 
     body("title").notEmpty().withMessage("Title is required"),
+    body("description").notEmpty().withMessage("Description is required"),
 
     body("price").isNumeric().notEmpty().withMessage("Price is required"),
     body("expected_duration_days")

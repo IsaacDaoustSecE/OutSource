@@ -1,0 +1,10 @@
+.app {
+    display: flex;
+    background: #4c2719;
+    background-size: cover;
+
+    width: 100vw;
+    min-height: 100vh;
+
+    color: #f3d9dc;
+}

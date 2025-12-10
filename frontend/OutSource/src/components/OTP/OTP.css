@@ -1,93 +1,91 @@
-
-
 .verify-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background: #4b2515;
-  padding: 0 40px;
-  color: #e6c9c1;  /* softer light text */
-  gap: 80px;
-  font-family: 'Inter', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #4b2515;
+    padding: 0 40px;
+    color: #e6c9c1; /* softer light text */
+    gap: 80px;
+    font-family: "Inter", sans-serif;
 }
 
-.left-section {
-  max-width: 350px;
-}
+/* .left-section {
+    max-width: 500px;
+} */
 
 .title {
-  font-size: 42px;
-  font-weight: 700;
-  color: #f0cbc5;
-  margin-bottom: 8px;
+    font-size: 42px;
+    font-weight: 700;
+    color: #f0cbc5;
+    margin-bottom: 8px;
 }
 
 .subtitle {
-  opacity: 0.8;
-  margin-bottom: 40px;
-  font-size: 14px;
+    opacity: 0.8;
+    margin-bottom: 40px;
+    font-size: 14px;
 }
 
 h2 {
-  font-weight: 700;
-  margin-bottom: 12px;
-  font-size: 18px;
-  color: #f0cbc5;
+    font-weight: 700;
+    margin-bottom: 12px;
+    font-size: 18px;
+    color: #f0cbc5;
 }
 
 p {
-  font-size: 14px;
-  line-height: 1.5;
-  margin-bottom: 24px;
-  opacity: 0.9;
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 24px;
+    opacity: 0.9;
 }
 
 .code-inputs {
-  display: flex;
-  gap: 12px;
-  margin-bottom: 40px;
+    display: flex;
+    gap: 12px;
+    margin-bottom: 40px;
 }
 
 .code-inputs input {
-  width: 48px;
-  height: 56px;
-  font-size: 32px;
-  font-weight: 700;
-  text-align: center;
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  background: rgba(255, 255, 255, 0.1);
-  color: #f0cbc5;
-  outline: none;
-  transition: border-color 0.3s ease;
+    width: 48px;
+    height: 56px;
+    font-size: 32px;
+    font-weight: 700;
+    text-align: center;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.1);
+    color: #f0cbc5;
+    outline: none;
+    transition: border-color 0.3s ease;
 }
 
 .code-inputs input:focus {
-  border-color: #c8ad55;
-  background: rgba(255, 255, 255, 0.15);
+    border-color: #c8ad55;
+    background: rgba(255, 255, 255, 0.15);
 }
 
 .resend-btn {
-  padding: 10px 16px;
-  border: none;
-  border-radius: 6px;
-  background: rgba(255, 255, 255, 0.15);
-  color: #8f6f5e;
-  cursor: pointer;
-  font-size: 14px;
-  font-weight: 600;
-  transition: background-color 0.3s ease;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.15);
+    color: #8f6f5e;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
 }
 
 .resend-btn:hover {
-  background: #c8ad55;
-  color: #4b2515;
+    background: #c8ad55;
+    color: #4b2515;
 }
 
 .right-section img {
-  width: 260px;
-  height: auto;
-  transform: scaleX(-1);
-  user-select: none;
+    width: 260px;
+    height: auto;
+    transform: scaleX(-1);
+    user-select: none;
 }
