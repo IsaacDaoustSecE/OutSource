@@ -52,14 +52,12 @@ function Nav({ selectedRoute }) {
     );
 }
 
-export default function Header({ selectedRoute }) {
+export default function Header({ showLinks = true }) {
     return (
         <header className={styles.root}>
             <h1 className="title">OutSource</h1>
-            <p className={styles.subtitle}>
-                Hire talent. Get hired. All in one place.
-            </p>
-            <Nav />
+            <p className={styles.subtitle}>Hire talent. Get hired. All in one place.</p>
+            {showLinks && <Nav />}
         </header>
     );
 }
