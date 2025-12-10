@@ -8,8 +8,9 @@ import Freelancers from "./components/Freelancers/Freelancers.jsx";
 import Home from "./components/Home/Home.jsx";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Freelancer from "./components/Freelancer/Freelancer.jsx";
-
+import Login from "./components/Login/Login.jsx";
 import "./App.css";
+
 
 function App() {
     return (
@@ -17,6 +18,7 @@ function App() {
             <BrowserRouter>
                 <Routes>
                     <Route path="/" element={<SignUp />} />
+                    <Route path="/Login" element={<Login />} />
                     <Route path="/home" element={<Home />} />
                     <Route path="/otp" element={<OTP />} />
                     <Route path="/messages" element={<Messages />} />

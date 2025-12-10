@@ -49,7 +49,7 @@ const SignUp = () => {
     return (
         <div className="content-container">
             <div className="left-section">
-                <Header />
+                <Header showLinks={false} />
 
                 <form className="SignUp-form" onSubmit={handleSubmit}>
                     <h2>Sign Up</h2>
@@ -77,7 +77,7 @@ const SignUp = () => {
                     <label>Full Name</label>
                     <input
                         type="text"
-                        name="fullName"
+                        name="FullName"
                         value={form.fullName}
                         onChange={handleChange}
                         disabled={loading}
@@ -111,6 +111,16 @@ const SignUp = () => {
                             disabled={loading}
                         >
                             {loading ? "Creating Account..." : "Create Account"}
+                        </button>
+                    </div>
+                    <div className="LoginButton-container">
+                        <button
+                            type="submit"
+                            className="Login-btn"
+                            disabled={loading}
+                            onClick={() => navigate("/Login")}
+                            >
+                           {loading ? "Going to Login Page": "Already have an account? Log In"} 
                         </button>
                     </div>
                 </form>
