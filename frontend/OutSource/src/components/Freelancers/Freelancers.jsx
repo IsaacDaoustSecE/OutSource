@@ -11,7 +11,7 @@ import { Warren } from "../Warren.jsx";
 export function FreelancerCard({ freelancer }) {
     return (
         <Card
-            headerLeft={freelancer.user.name}
+            headerLeft={freelancer?.user?.name}
             headerRight={freelancer.field}
             text={freelancer.bio}
             footerLeft={

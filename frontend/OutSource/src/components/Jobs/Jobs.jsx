@@ -31,7 +31,7 @@ export function Job({ job }) {
         <Card
             headerLeft={job.title}
             headerRight={"$" + job.price}
-            underHeader={job.freelancer.user.name}
+            underHeader={job?.freelancer?.user?.name}
             text={job.description}
             footerLeft={
                 <span>
