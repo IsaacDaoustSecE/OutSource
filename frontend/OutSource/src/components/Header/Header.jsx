@@ -6,7 +6,7 @@ function Nav({ selectedRoute }) {
     console.log(location);
 
     return (
-        <nav>
+        <nav className={styles.nav}>
             <a
                 className={
                     location.pathname.endsWith("/")
@@ -53,7 +53,7 @@ function Nav({ selectedRoute }) {
 
 export default function Header({ selectedRoute }) {
     return (
-        <header className={styles.card}>
+        <header className={styles.root}>
             <h1 className="title">OutSource</h1>
             <p className="subtitle">
                 Hire talent. Get hired. All in one place.

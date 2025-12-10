@@ -24,7 +24,7 @@ import drawing from "../../assets/drawing.png";
 import useApi from "../../shared/useapi.js";
 import Header from "../Header/Header.jsx";
 
-function Job({ job }) {
+export function Job({ job }) {
     console.log(job);
     return (
         <Card

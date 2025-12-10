@@ -7,7 +7,7 @@ import drawing from "../../assets/drawing.png";
 import useApi from "../../shared/useapi.js";
 import Header from "../Header/Header.jsx";
 
-function Freelancer({ freelancer }) {
+export function Freelancer({ freelancer }) {
     console.log(freelancer);
     return (
         <Card
@@ -79,7 +79,12 @@ export default function Freelancers() {
                 <h2>Freelancers</h2>
                 {data &&
                     data.map((freelancer) => {
-                        return <Freelancer freelancer={freelancer} />;
+                        return (
+                            <Freelancer
+                                key={freelancer._id}
+                                freelancer={freelancer}
+                            />
+                        );
                     })}
             </div>
 

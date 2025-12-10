@@ -59,7 +59,6 @@ const useApi = (route, options = {}, userConfig = {}) => {
     );
 
     useEffect(() => {
-        console.log("effecting!@");
         if (config.auto) refetch();
     }, []);
 

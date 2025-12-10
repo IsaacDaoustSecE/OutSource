@@ -70,5 +70,4 @@ input {
 .right-section img {
     width: 260px;
     height: auto;
-    transform: scaleX(-1);
 }

@@ -8,6 +8,8 @@ import Freelancers from "./components/Freelancers/Freelancers.jsx";
 import Home from "./components/Home/Home.jsx";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
+import "./App.css";
+
 function App() {
     return (
         <div className={styles.app}>
