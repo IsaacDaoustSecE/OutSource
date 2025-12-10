@@ -1,49 +1,14 @@
-import styles from "./Jobs.module.css";
-import Card from "../Card/Card.jsx";
-import { Warren } from "../Warren.jsx";
-
-// useEffect(() => {
-//     fetch("http://localhost:3000/messages")
-//         .then((response) => {
-//             if (!response.ok) {
-//                 throw new Error("Network response was not ok");
-//             }
-//             return response.json();
-//         })
-//         .then((data) => {
-//             setFetchedProducts(data);
-//         })
-//         .catch((error) => {
-//             console.error("Error fetching messages:", error);
-//         })
-//         .finally(() => {});
-// }, []);
+import styles from "./Messages.module.css";
+import Message from "./message";
 
 import { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import drawing from "../../assets/drawing.png";
 import useApi from "../../shared/useapi.js";
 import Header from "../Header/Header.jsx";
+import { Warren } from "../Warren.jsx";
 
-export function Job({ job }) {
-    console.log(job);
-    return (
-        <Card
-            headerLeft={job.title}
-            headerRight={"$" + job.price}
-            underHeader={job.freelancer.user.name}
-            text={job.description}
-            footerLeft={
-                <span>
-                    Estimated duration: {job.expected_duration_days} day(s)
-                </span>
-            }
-            footerRight={<span>Order</span>}
-        />
-    );
-}
-
-export default function Jobs() {
+export default function Messages() {
     // const navigate = useNavigate();
 
     // const [form, setForm] = useState({
@@ -52,10 +17,16 @@ export default function Jobs() {
     //     password: "",
     // });
 
-    const { loading, data, error, formError, refetch } = useApi("/jobs", {
-        method: "GET",
-        headers: { "Content-Type": "application/json" },
-    });
+    // TODO: Replace with user's id from JWT
+    const id = "693628716344bde4f9920cca";
+
+    const { loading, data, error, formError, refetch } = useApi(
+        "/messages/user/" + id,
+        {
+            method: "GET",
+            headers: { "Content-Type": "application/json" },
+        }
+    );
 
     // useEffect(() => {
     //     // refetch();
@@ -91,10 +62,18 @@ export default function Jobs() {
             <div className="left-section">
                 <Header />
 
-                <h2>Jobs</h2>
+                <h2>Messages</h2>
                 {data &&
-                    data.map((job) => {
-                        return <Job key={job._id} job={job} />;
+                    data.map((message) => {
+                        return (
+                            <Message
+                                key={message._id}
+                                subject={message.subject}
+                                fromUser={message.fromUser}
+                                text={message.text}
+                                date={new Date(message.createdAt)}
+                            />
+                        );
                     })}
             </div>
 

@@ -1,0 +1,27 @@
+.root {
+    margin-bottom: 3rem;
+}
+
+.subtitle {
+    margin-top: 1rem;
+}
+
+.root p {
+    margin-bottom: 1rem;
+}
+
+.root a {
+    color: #f3d9dc !important;
+    opacity: 0.8;
+}
+
+.root .selectedRoute {
+    font-weight: 600;
+    text-decoration: none;
+    opacity: 1;
+}
+
+.nav {
+    display: flex;
+    gap: 0.875rem;
+}

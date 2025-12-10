@@ -2,6 +2,7 @@ const { Router } = require("express");
 const createMessageRules = require("./middlewares/create-messages-rules");
 const updateMessageRules = require("./middlewares/update-messages-rules");
 const messageModel = require("./messages-model");
+const UserModel = require("../users/users-model");
 
 const messagesRoute = Router();
 
@@ -27,10 +28,46 @@ messagesRoute.get("/messages/:id", async (req, res) => {
     }
 });
 
+messagesRoute.get("/messages/user/:id", async (req, res) => {
+    const id = req.params.id;
+
+    try {
+        const maybeUser = await UserModel.findById(id);
+
+        if (!maybeUser) {
+            return res.status(404).send("user not found");
+        }
+
+        const maybeMessage = await messageModel
+            .find({
+                toUser: maybeUser,
+            })
+            .populate("fromUser");
+
+        if (!maybeMessage) {
+            res.status(404).send("message not found");
+        } else {
+            res.status(200).json(maybeMessage);
+        }
+    } catch (e) {
+        console.error(e);
+        res.status(500).send("Unable to get message by id");
+    }
+});
+
 messagesRoute.post("/messages", createMessageRules, async (req, res) => {
     try {
+        const to = await UserModel.findById(req.body.to_user);
+        const from = await UserModel.findById(req.body.from_user);
+
+        if (!to || !from) {
+            return res.status(500).send("Unable to find to or from user");
+        }
+
         const newMessage = await messageModel.create({
             ...req.body,
+            toUser: to,
+            fromUser: from,
         });
 
         res.status(200).json(newMessage);

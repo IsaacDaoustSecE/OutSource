@@ -1,113 +1,124 @@
-import { useState, useEffect, useCallback, } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Signup.css";
-import drawing from "../../assets/drawing.png";
 import useApi from "../../shared/useapi.js";
+import Header from "../Header/Header.jsx";
+import { Warren } from "../Warren.jsx";
 
 const SignUp = () => {
-  const navigate = useNavigate();
+    const navigate = useNavigate();
 
-  const [form, setForm] = useState({
-    fullName: "",
-    email: "",
-    password: "",
-  });
-
-  const { loading, data, error, formError, refetch } = useApi(
-    "/users/register",
-    {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-    },
-    { auto: false }
-  );
-
-  // Redirect to OTP page
-  useEffect(() => {
-    if (!data) return;
-
-    // navigate to /OTP page
-    navigate("/OTP", {
-      state: { email: form.email },
+    const [form, setForm] = useState({
+        fullName: "",
+        email: "",
+        password: "",
     });
-  }, [data, form.email, navigate]);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setForm({ ...form, [name]: value });
-  };
+    const { loading, data, error, formError, refetch } = useApi(
+        "/users/register",
+        {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+        },
+        { auto: false }
+    );
 
-  const handleSubmit = useCallback(
-    (e) => {
-      e.preventDefault();
-      refetch(form); // submit to backend
-    },
-    [form]
-  );
+    // Redirect to OTP page
+    useEffect(() => {
+        if (!data) return;
 
-  return (
-    <div className="SignUp-container">
-      <div className="left-section">
-        <h1 className="title">OutSource</h1>
-        <p className="subtitle">Hire talent. Get hired. All in one place.</p>
+        // navigate to /otp
+        navigate("/otp", {
+            state: { email: form.email },
+        });
+    }, [data, form.email, navigate]);
 
-        <form className="SignUp-form" onSubmit={handleSubmit}>
-          <h2>Sign Up</h2>
-          <h3>Join the marketplace where work finds you</h3>
-          
-          <div
-            className="error"
-            style={{ display: error ? "block" : "none", marginBottom: "20px" }}
-          >
-            <p>{error}</p>
-            <ul style={{ display: formError?.length ? "block" : "none" }}>
-              {formError?.map((e, i) => (
-                <li key={i}>{e.message}</li>
-              ))}
-            </ul>
-          </div>
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setForm({ ...form, [name]: value });
+    };
 
-          <label>Full Name</label>
-          <input
-            type="text"
-            name="fullName"
-            value={form.fullName}
-            onChange={handleChange}
-            disabled={loading}
-            required
-          />
+    const handleSubmit = useCallback(
+        (e) => {
+            e.preventDefault();
+            refetch(form); // submit to backend
+        },
+        [form, refetch]
+    );
 
-          <label>Email</label>
-          <input
-            type="email"
-            name="email"
-            value={form.email}
-            onChange={handleChange}
-            disabled={loading}
-            required
-          />
+    return (
+        <div className="content-container">
+            <div className="left-section">
+                <Header />
 
-          <label>Password</label>
-          <input
-            type="password"
-            name="password"
-            value={form.password}
-            onChange={handleChange}
-            disabled={loading}
-            required
-          />
+                <form className="SignUp-form" onSubmit={handleSubmit}>
+                    <h2>Sign Up</h2>
+                    <h3>Join the marketplace where work finds you</h3>
 
-          <button type="submit" className="CreateAcc-btn" disabled={loading}>
-            {loading ? "Creating Account..." : "Create Account"}
-          </button>
-        </form>
-      </div>
+                    <div
+                        className="error"
+                        style={{
+                            display: error ? "block" : "none",
+                            marginBottom: "20px",
+                        }}
+                    >
+                        <p>{error}</p>
+                        <ul
+                            style={{
+                                display: formError?.length ? "block" : "none",
+                            }}
+                        >
+                            {formError?.map((e, i) => (
+                                <li key={i}>{e.message}</li>
+                            ))}
+                        </ul>
+                    </div>
 
-      <div className="right-section">
-        <img src={drawing} alt="drawing" />
-      </div>
-    </div>
-  );
+                    <label>Full Name</label>
+                    <input
+                        type="text"
+                        name="fullName"
+                        value={form.fullName}
+                        onChange={handleChange}
+                        disabled={loading}
+                        required
+                    />
+
+                    <label>Email</label>
+                    <input
+                        type="email"
+                        name="email"
+                        value={form.email}
+                        onChange={handleChange}
+                        disabled={loading}
+                        required
+                    />
+
+                    <label>Password</label>
+                    <input
+                        type="password"
+                        name="password"
+                        value={form.password}
+                        onChange={handleChange}
+                        disabled={loading}
+                        required
+                    />
+
+                    <div className="button-container">
+                        <button
+                            type="submit"
+                            className="CreateAcc-btn"
+                            disabled={loading}
+                        >
+                            {loading ? "Creating Account..." : "Create Account"}
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <Warren />
+        </div>
+    );
 };
 
 export default SignUp;

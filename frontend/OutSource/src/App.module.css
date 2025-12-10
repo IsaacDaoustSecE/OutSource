@@ -1,0 +1,9 @@
+.app {
+    display: flex;
+    background: #4c2719;
+    background-size: cover;
+
+    padding-top: 4rem;
+
+    color: #f3d9dc;
+}

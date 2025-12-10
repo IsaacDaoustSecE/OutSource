@@ -5,6 +5,7 @@ const updateJobsRules = [
     body("freelancer").optional().isString().trim(),
 
     body("title").optional(),
+    body("description").optional(),
 
     body("price").isNumeric().optional(),
     body("expected_duration_days").optional().isNumeric(),

@@ -19,7 +19,10 @@ freelancersRoute.get("/freelancers/:id", async (req, res) => {
     const id = req.params.id;
 
     try {
-        const maybeFreelancer = await FreelancerModel.findById(id);
+        const maybeFreelancer = await FreelancerModel.findById(id).populate([
+            "user",
+            "jobs",
+        ]);
 
         if (!maybeFreelancer) {
             res.status(404).send("Freelancer not found");

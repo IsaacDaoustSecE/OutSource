@@ -1,29 +1,29 @@
+import styles from "./Message.module.css";
+import Card from "../Card/Card";
 
-import { useEffect } from "react";
-
-useEffect(() => {
-    fetch("http://localhost:3000/messages")
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        setFetchedProducts(data);
-      })
-      .catch((error) => {
-        console.error("Error fetching messages:", error);
-      })
-      .finally(() => {});
-  }, []);
-
-const message = () => {
-  return (
-    <div id = "message-page">
-      
-    </div>
-  )
+function Actions() {
+    return (
+        <div className={styles.actions}>
+            <button>mark unread</button>
+            <button>delete</button>
+            <button>reply</button>
+        </div>
+    );
 }
 
-export default message
+export default function Message({ subject, text, fromUser, date }) {
+    return (
+        <>
+            <Card
+                headerLeft={subject}
+                headerRight={date.toLocaleDateString("en-US", {
+                    day: "numeric",
+                    month: "short",
+                })}
+                underHeader={fromUser.name}
+                text={text}
+                footerRight={<Actions />}
+            />
+        </>
+    );
+}

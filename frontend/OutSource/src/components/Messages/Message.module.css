@@ -1,0 +1,20 @@
+.message {
+    border: 1px solid #694030;
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
+}
+
+.subject {
+    font-weight: 600;
+}
+
+.date,
+.text,
+.username {
+    opacity: 0.7;
+}
+
+.actions {
+    display: flex;
+    gap: 0.5rem;
+}
