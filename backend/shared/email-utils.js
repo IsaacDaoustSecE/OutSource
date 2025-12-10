@@ -1,10 +1,11 @@
 const { google } = require("googleapis");
 // Import and configure the 'dotenv' package at the top of server.js to load environment variables.
-require("dotenv").config();
+const path = require("path");
+console.log({ path: path.resolve(__dirname + "/../.env") });
 console.log(process.env.TOKEN_SECRET);
+console.log(process.env.GOOGLE_client_secret);
 
 const CLIENT_ID = process.env.GOOGLE_client_id;
-
 const CLIENT_SECRET = process.env.GOOGLE_client_secret;
 const REFRESH_TOKEN = process.env.GOOGLE_REFRESH_TOKEN;
 const SENDER_EMAIL = process.env.GOOGLE_SENDER_EMAIL;
