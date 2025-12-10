@@ -5,6 +5,7 @@ export default function Card({
     headerRight,
     underHeader,
     text,
+    textContent,
     footerLeft,
     footerRight,
 }) {
@@ -19,7 +20,11 @@ export default function Card({
                     {underHeader ? underHeader : null}
                 </span>
             </div>
-            <span className={styles.text}>{text}</span>
+            {textContent ? (
+                textContent
+            ) : (
+                <span className={styles.text}>{text}</span>
+            )}
             <div className={styles.footer}>
                 <div>{footerLeft ? footerLeft : null}</div>
                 <div>{footerRight ? footerRight : null}</div>

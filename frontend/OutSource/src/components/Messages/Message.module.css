@@ -18,3 +18,21 @@
     display: flex;
     gap: 0.5rem;
 }
+
+.replyRoot {
+    margin-top: -0.5rem;
+    background-color: #4c2719;
+    z-index: 1;
+    transform: translateX(1rem);
+}
+
+.textarea {
+    width: 100%;
+    padding: 13px;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+    opacity: 0.4;
+}
