@@ -1,10 +1,11 @@
 import { useLocation } from "react-router-dom";
 import styles from "./Header.module.css";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../../AuthContext";
 
 function Nav({ selectedRoute }) {
     const location = useLocation();
-    console.log(location);
 
     return (
         <nav className={styles.nav}>
@@ -53,8 +54,10 @@ function Nav({ selectedRoute }) {
 }
 
 export default function Header({ showLinks = true }) {
+    const { user } = useContext(AuthContext);
     return (
         <header className={styles.root}>
+            <p>Signed in as: {user ? user.name : null}</p>
             <h1 className="title">OutSource</h1>
             <p className={styles.subtitle}>
                 Hire talent. Get hired. All in one place.

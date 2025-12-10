@@ -34,6 +34,7 @@ const useApi = (route, options = {}, userConfig = {}) => {
                         : options.body
                           ? JSON.stringify(options.body)
                           : null,
+                    credentials: "include",
                 });
 
                 const json = await res.json();

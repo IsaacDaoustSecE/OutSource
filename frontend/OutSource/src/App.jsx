@@ -11,25 +11,27 @@ import Freelancer from "./components/Freelancer/Freelancer.jsx";
 import Login from "./components/Login/Login.jsx";
 import JobPosting from "./components/JobPosting/JobPosting.jsx";
 import "./App.css";
-
+import { AuthProvider } from "./AuthProvider.jsx";
 
 function App() {
     return (
-        <div className={styles.app}>
-            <BrowserRouter>
-                <Routes>
-                    <Route path="/" element={<SignUp />} />
-                    <Route path="/Login" element={<Login />} />
-                    <Route path="/home" element={<Home />} />
-                    <Route path="/otp" element={<OTP />} />
-                    <Route path="/messages" element={<Messages />} />
-                    <Route path="/jobs" element={<Jobs />} />
-                    <Route path="/freelancers" element={<Freelancers />} />
-                    <Route path="/freelancers/*" element={<Freelancer />} />
-                    <Route path="/JobPosting" element={<JobPosting />} />
-                </Routes>
-            </BrowserRouter>
-        </div>
+        <AuthProvider>
+            <div className={styles.app}>
+                <BrowserRouter>
+                    <Routes>
+                        <Route path="/" element={<SignUp />} />
+                        <Route path="/Login" element={<Login />} />
+                        <Route path="/home" element={<Home />} />
+                        <Route path="/otp" element={<OTP />} />
+                        <Route path="/messages" element={<Messages />} />
+                        <Route path="/jobs" element={<Jobs />} />
+                        <Route path="/freelancers" element={<Freelancers />} />
+                        <Route path="/freelancers/*" element={<Freelancer />} />
+                        <Route path="/JobPosting" element={<JobPosting />} />
+                    </Routes>
+                </BrowserRouter>
+            </div>
+        </AuthProvider>
     );
 }
 

@@ -72,6 +72,7 @@ messagesRoute.post("/messages", createMessageRules, async (req, res) => {
 
         res.status(200).json(newMessage);
     } catch (e) {
+        console.error(e);
         res.status(500).send("Unable to add message");
     }
 });

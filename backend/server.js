@@ -12,14 +12,19 @@ const {
 const { jobsRoute } = require("./modules/jobs/jobs-routes");
 const { messagesRoute } = require("./modules/messages/messages-routes");
 const { ordersRoute } = require("./modules/orders/orders-routes");
-const {oauthRoutes} = require("./modules/auth/GoogAuth-routes");
+const { oauthRoutes } = require("./modules/auth/GoogAuth-routes");
 
 const port = 3000;
 const hostname = "localhost";
 
 const server = express();
 
-server.use(cors());
+server.use(
+    cors({
+        origin: "http://localhost:5173",
+        credentials: true,
+    })
+);
 
 // built-in middlewares to parse request body in application-level
 server.use(express.json());

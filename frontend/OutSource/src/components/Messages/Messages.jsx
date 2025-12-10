@@ -7,9 +7,13 @@ import drawing from "../../assets/drawing.png";
 import useApi from "../../shared/useapi.js";
 import Header from "../Header/Header.jsx";
 import { Warren } from "../Warren.jsx";
+import { AuthContext } from "../../AuthContext.js";
+import { useContext } from "react";
 
 export default function Messages() {
     // const navigate = useNavigate();
+
+    // const user = useContext(AuthContext);
 
     // const [form, setForm] = useState({
     //     fullName: "",

@@ -80,7 +80,12 @@ usersRoute.post("/users/login", loginRules, async (req, res) => {
     if (foundUser.emailVerified) {
         // generate access token
         const token = encodeToken(foundUser);
-        res.cookie("Authorization", "Bearer " + token);
+        res.cookie("Authorization", "Bearer " + token, {
+            httpOnly: true,
+            secure: true,
+            sameSite: "none",
+            path: "/",
+        });
         return res.json({ user: foundUser, token });
     }
 
@@ -137,7 +142,12 @@ usersRoute.post("/users/verify-login", verifyLoginRules, async (req, res) => {
 
     // generate access token
     const token = encodeToken(user);
-    res.cookie("Authorization", "Bearer " + token);
+    res.cookie("Authorization", "Bearer " + token, {
+        httpOnly: true,
+        secure: true,
+        sameSite: "none",
+        path: "/",
+    });
     res.json({ user, token });
 });
 

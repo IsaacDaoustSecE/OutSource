@@ -1,0 +1,20 @@
+meta {
+  name: Get Me v2
+  type: http
+  seq: 12
+}
+
+post {
+  url: http://localhost:3000/users/me
+  body: formUrlEncoded
+  auth: inherit
+}
+
+body:form-urlencoded {
+  auth: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OTM5YjNmZTA1NjIwNTRhMDk3Y2QwODAiLCJuYW1lIjoiSXNhYWMiLCJlbWFpbCI6ImlzYWFjZDIwMDE1QGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJEpkVlExbEl6TzdsNmFXOERJWElvZU9sY2dZOXVLSzdJNDBqZVNQcDBiejU3Nk5yLlNnQ2NhIiwicm9sZSI6ImFkbWluIiwiY3JlYXRlZEF0IjoiMjAyNS0xMi0xMFQxNzo1MzoxMy43NzRaIiwiZW1haWxWZXJpZmllZCI6dHJ1ZSwiaWF0IjoxNzY1Mzk3NzY3LCJleHAiOjE3NjU0MDEzNjd9.8RotB4q3PzGbDKTeJ3WXIKRdOtyoJe_kCqhewIXJTME
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
