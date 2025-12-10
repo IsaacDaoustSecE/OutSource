@@ -72,7 +72,7 @@ export default function Freelancers() {
     // );
 
     return (
-        <div className="SignUp-container">
+        <div className="content-container">
             <div className="left-section">
                 <Header />
 

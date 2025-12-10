@@ -7,6 +7,8 @@
     transition:
         100ms background,
         100ms border;
+
+    font-size: 0.875rem !important;
 }
 
 .card:hover {
@@ -19,7 +21,7 @@
 .footer {
     display: flex;
     justify-content: space-between;
-    font-size: 0.875rem;
+    /* font-size: 0.875rem; */
 }
 
 .header {
@@ -37,10 +39,15 @@
     margin-bottom: 0.5rem;
 }
 
+.headerRight {
+    font-size: 0.875rem;
+}
+
 .underHeader {
     border-bottom: 1px solid #694030;
     padding-bottom: 0.5rem;
     margin-bottom: 1rem;
+    font-size: 0.875rem;
 }
 
 .text {

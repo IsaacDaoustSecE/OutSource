@@ -1,5 +1,6 @@
 import { useLocation } from "react-router-dom";
 import styles from "./Header.module.css";
+import { Link } from "react-router-dom";
 
 function Nav({ selectedRoute }) {
     const location = useLocation();
@@ -7,46 +8,46 @@ function Nav({ selectedRoute }) {
 
     return (
         <nav className={styles.nav}>
-            <a
+            <Link
                 className={
                     location.pathname.endsWith("/")
                         ? styles.selectedRoute
                         : undefined
                 }
-                href="/"
+                to="/"
             >
                 Home
-            </a>
-            <a
+            </Link>
+            <Link
                 className={
                     location.pathname.endsWith("/messages")
                         ? styles.selectedRoute
                         : undefined
                 }
-                href="/messages"
+                to="/messages"
             >
                 Messages
-            </a>
-            <a
+            </Link>
+            <Link
                 className={
                     location.pathname.endsWith("/jobs")
                         ? styles.selectedRoute
                         : undefined
                 }
-                href="/jobs"
+                to="/jobs"
             >
                 Jobs
-            </a>
-            <a
+            </Link>
+            <Link
                 className={
                     location.pathname.endsWith("/freelancers")
                         ? styles.selectedRoute
                         : undefined
                 }
-                href="/freelancers"
+                to="/freelancers"
             >
                 Freelancers
-            </a>
+            </Link>
         </nav>
     );
 }
@@ -55,7 +56,7 @@ export default function Header({ selectedRoute }) {
     return (
         <header className={styles.root}>
             <h1 className="title">OutSource</h1>
-            <p className="subtitle">
+            <p className={styles.subtitle}>
                 Hire talent. Get hired. All in one place.
             </p>
             <Nav />

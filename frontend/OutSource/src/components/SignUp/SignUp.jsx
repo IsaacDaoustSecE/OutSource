@@ -47,7 +47,7 @@ const SignUp = () => {
     );
 
     return (
-        <div className="SignUp-container">
+        <div className="content-container">
             <div className="left-section">
                 <Header />
 
@@ -104,13 +104,15 @@ const SignUp = () => {
                         required
                     />
 
-                    <button
-                        type="submit"
-                        className="CreateAcc-btn"
-                        disabled={loading}
-                    >
-                        {loading ? "Creating Account..." : "Create Account"}
-                    </button>
+                    <div className="button-container">
+                        <button
+                            type="submit"
+                            className="CreateAcc-btn"
+                            disabled={loading}
+                        >
+                            {loading ? "Creating Account..." : "Create Account"}
+                        </button>
+                    </div>
                 </form>
             </div>
 

@@ -1,9 +1,42 @@
 body {
-    background-color: #f5f5f5;
-    background-size: cover;
+    background: #4c2719;
+    /* background-size: cover; */
 
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 
     line-height: 140%;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.content-container {
+    display: flex;
+    justify-content: center;
+    background: #4c2719;
+    width: 100%;
+    min-height: 100vh;
+    padding: 0 40px;
+    color: white;
+    /* gap: 80px; */
+}
+
+h2 {
+    font-weight: 700;
+    margin-bottom: 1rem;
+    font-size: 24px;
+    color: #f0cbc5;
+}
+
+.left-section {
+    max-width: 470px;
+    width: 100%;
+    flex: 1;
+}
+
+.right-section img {
+    margin-top: 70px;
+    max-width: 400px;
 }

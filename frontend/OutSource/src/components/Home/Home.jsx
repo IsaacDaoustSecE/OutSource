@@ -33,8 +33,8 @@ export default function Home() {
     }, []);
 
     return (
-        <div className="page-container">
-            <div className="left-column">
+        <div className="content-container">
+            <div className="left-section">
                 <Header />
 
                 <SectionTitle
@@ -58,7 +58,7 @@ export default function Home() {
                 ))}
             </div>
 
-            <div className="image-container">
+            <div className="right-section">
                 <img
                     src={drawing}
                     alt="Illustration"
@@ -69,8 +69,6 @@ export default function Home() {
     );
 }
 
-// --- Helper Components ---
-
 function SectionTitle({ title, time }) {
     return (
         <div className="section-title">
@@ -79,30 +77,6 @@ function SectionTitle({ title, time }) {
                 <Link to="#!">View All</Link>
             </div>
             <p className="updated-time">{time}</p>
-        </div>
-    );
-}
-
-function Card({ title, user, price }) {
-    return (
-        <div className="card">
-            <div className="card-header">
-                <strong>{title}</strong>
-                <span>{price}</span>
-            </div>
-            <p className="card-user">{user}</p>
-        </div>
-    );
-}
-
-function FreelancerCard({ user, jobs, skills }) {
-    return (
-        <div className="card">
-            <div className="card-header">
-                <strong>{user}</strong>
-                <span>{jobs}</span>
-            </div>
-            <p className="card-user">{skills}</p>
         </div>
     );
 }

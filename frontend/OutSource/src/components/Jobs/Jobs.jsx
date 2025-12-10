@@ -86,14 +86,14 @@ export default function Jobs() {
     // );
 
     return (
-        <div className="SignUp-container">
+        <div className="content-container">
             <div className="left-section">
                 <Header />
 
                 <h2>Jobs</h2>
                 {data &&
                     data.map((job) => {
-                        return <Job job={job} />;
+                        return <Job key={job._id} job={job} />;
                     })}
             </div>
 

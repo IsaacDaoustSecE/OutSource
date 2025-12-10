@@ -15,10 +15,10 @@ body {
     gap: 80px;
 }
 
-.left-section {
+/* .left-section {
     max-width: 400px;
     width: 100%;
-}
+} */
 
 .title {
     font-size: 42px;
@@ -72,7 +72,12 @@ input {
     cursor: pointer;
     font-weight: 600;
     display: block;
-    margin-left: 200px;
+    align-self: right;
+}
+
+.button-container {
+    display: flex;
+    justify-content: end;
 }
 
 .right-section img {
