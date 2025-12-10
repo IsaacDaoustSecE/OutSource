@@ -4,8 +4,15 @@ const CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
 const CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
 const REFRESH_TOKEN = process.env.GOOGLE_REFRESH_TOKEN;
 const SENDER_EMAIL = process.env.GOOGLE_SENDER_EMAIL;
+const REDIRECT_URI = "http://localhost:3000/google/oauth/callback"; 
 
-const oAuth2Client = new google.auth.OAuth2(CLIENT_ID, CLIENT_SECRET);
+// MUST include redirect URI
+const oAuth2Client = new google.auth.OAuth2(
+  CLIENT_ID,
+  CLIENT_SECRET,
+  REDIRECT_URI
+);
+
 oAuth2Client.setCredentials({ refresh_token: REFRESH_TOKEN });
 
 const gmail = google.gmail({ version: "v1", auth: oAuth2Client });
@@ -20,7 +27,9 @@ async function sendEmail(to, subject, message) {
       "",
       `<p>${message}</p>`,
     ];
+
     const composedEmail = rawEmail.join("\n");
+
     const encodedEmail = Buffer.from(composedEmail)
       .toString("base64")
       .replace(/\+/g, "-")
@@ -29,15 +38,14 @@ async function sendEmail(to, subject, message) {
 
     await gmail.users.messages.send({
       userId: "me",
-      requestBody: {
-        raw: encodedEmail,
-      },
+      requestBody: { raw: encodedEmail },
     });
 
     return true;
   } catch (error) {
-    console.log(`Error sending email: `, error);
+    console.error("Error sending email:", error.response?.data || error);
     return false;
   }
 }
+
 module.exports = sendEmail;

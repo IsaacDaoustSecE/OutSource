@@ -19,24 +19,45 @@ const usersRoute = Router();
  * Register Route
  */
 usersRoute.post("/users/register", registerRules, async (req, res) => {
+  try {
     const newUser = req.body;
-    const existingUser = await UserModel.findOne({
-        email: newUser.email,
-    });
+
+    // 1. Check if user exists
+    const existingUser = await UserModel.findOne({ email: newUser.email });
     if (existingUser) {
-        return res.status(500).json({
-            errorMessage: `User with ${newUser.email} already exist`,
-        });
+      return res.status(409).json({
+        errorMessage: `User with ${newUser.email} already exists`,
+      });
     }
+
+    // 2. Create user
     const addedUser = await UserModel.create(newUser);
     if (!addedUser) {
-        return res.status(500).send({
-            errorMessage: `Oops! User couldn't be added!`,
-        });
+      return res.status(500).json({
+        errorMessage: `Oops! User couldn't be added!`,
+      });
     }
+
+    // 3. Generate OTP
+    const otp = randomNumberOfNDigits(6);
+    await OTPModel.create({ email: newUser.email, otp });
+
+    // 4. Send OTP email
+    await sendEmail(
+      newUser.email,
+      "Your OutSource Registration OTP",
+      `Hello! Your One Time Password is: ${otp}`
+    );
+
+    // 5. Return user without password
     const user = { ...addedUser.toJSON(), password: undefined };
-    res.json(user);
+    res.json({ user, message: "User created. OTP sent to email." });
+  } catch (err) {
+    console.error("Register error:", err); // Logs the exact reason for 500
+    res.status(500).json({ errorMessage: "Internal Server Error" });
+  }
 });
+
 
 /**
  * Login Route
@@ -72,7 +93,7 @@ usersRoute.post("/users/login", loginRules, async (req, res) => {
 
         await sendEmail(
             email,
-            "Lab 8 OTP",
+            "OutSource Login OTP",
             "Hello! Your One Time Password to login is: " + otp
         );
         return res.status(200).send("Email sent");

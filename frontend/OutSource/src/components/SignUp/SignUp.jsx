@@ -26,8 +26,8 @@ const SignUp = () => {
   useEffect(() => {
     if (!data) return;
 
-    // navigate to /otp
-    navigate("/otp", {
+    // navigate to /OTP page
+    navigate("/OTP", {
       state: { email: form.email },
     });
   }, [data, form.email, navigate]);
