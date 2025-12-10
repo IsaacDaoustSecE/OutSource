@@ -119,8 +119,10 @@ const SignUp = () => {
                             className="Login-btn"
                             disabled={loading}
                             onClick={() => navigate("/Login")}
-                            >
-                           {loading ? "Going to Login Page": "Already have an account? Log In"} 
+                        >
+                            {loading
+                                ? "Going to Login Page"
+                                : "Already have an account? Log In"}
                         </button>
                     </div>
                 </form>
