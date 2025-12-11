@@ -84,6 +84,7 @@ usersRoute.post("/users/login", loginRules, async (req, res) => {
             httpOnly: true,
             secure: process.env.ENV === "prod" ? true : false,
             sameSite: process.env.ENV === "prod" ? "None" : "Lax",
+            domain: process.env.ENV === "prod" ? "vercel.app" : undefined,
             path: "/",
         });
         return res.json({ user: foundUser, token });
@@ -151,6 +152,7 @@ usersRoute.post("/users/verify-login", verifyLoginRules, async (req, res) => {
         httpOnly: true,
         secure: process.env.ENV === "prod" ? true : false,
         sameSite: process.env.ENV === "prod" ? "None" : "Lax",
+        domain: process.env.ENV === "prod" ? "vercel.app" : undefined,
         path: "/",
     });
     res.json({ user, token });
