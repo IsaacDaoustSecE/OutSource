@@ -13,7 +13,9 @@ export const AuthProvider = ({ children }) => {
     useEffect(() => {
         const path = location.pathname;
         const onUserPage =
-            path.startsWith("/login") || path.startsWith("/signup");
+            path.startsWith("/login") ||
+            path.startsWith("/signup") ||
+            path.startsWith("/otp");
 
         console.log(data, onUserPage, path);
 

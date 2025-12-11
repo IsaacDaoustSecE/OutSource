@@ -5,8 +5,8 @@ console.log({ path: path.resolve(__dirname + "/../.env") });
 console.log(process.env.TOKEN_SECRET);
 console.log(process.env.GOOGLE_client_secret);
 
-const CLIENT_ID = process.env.GOOGLE_client_id;
-const CLIENT_SECRET = process.env.GOOGLE_client_secret;
+const CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
+const CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
 const REFRESH_TOKEN = process.env.GOOGLE_REFRESH_TOKEN;
 const SENDER_EMAIL = process.env.GOOGLE_SENDER_EMAIL;
 const REDIRECT_URI = "http://localhost:3000/google/oauth/callback";

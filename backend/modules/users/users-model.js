@@ -3,7 +3,7 @@ const { encodePassword } = require("../../shared/password-utils");
 
 const userSchema = new mongoose.Schema(
     {
-        name: String,
+        name: { type: String, required: true },
         email: { type: String, required: true, unique: true },
         emailVerified: { type: Boolean, required: true, default: false },
 

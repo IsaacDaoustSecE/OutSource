@@ -50,17 +50,6 @@ const updateUserRules = [
         .matches(/\d/)
         .withMessage(msg("passwordNumber")),
 
-    body("phone")
-        .optional()
-        .matches(/^\d{3}-\d{3}-\d{4}$/)
-        .withMessage(msg("phoneFormat")),
-
-    body("address")
-        .optional()
-        .isString()
-        .withMessage(msg("addressString"))
-        .trim(),
-
     checkValidation,
 ];
 

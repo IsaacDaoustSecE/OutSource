@@ -168,7 +168,7 @@ usersRoute.get("/users", authorize(["admin"]), async (req, res) => {
 /**
  * Get logged in user details
  */
-usersRoute.get("/users/me", authorize(["admin"]), async (req, res) => {
+usersRoute.get("/users/me", authorize(["admin", "user"]), async (req, res) => {
     const userId = req.user?.id;
     console.log("me id:", userId, req.cookies);
     if (!userId) {

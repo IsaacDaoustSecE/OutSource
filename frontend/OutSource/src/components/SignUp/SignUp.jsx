@@ -9,7 +9,7 @@ const SignUp = () => {
     const navigate = useNavigate();
 
     const [form, setForm] = useState({
-        fullName: "",
+        name: "",
         email: "",
         password: "",
     });
@@ -36,6 +36,7 @@ const SignUp = () => {
     const handleChange = (e) => {
         const { name, value } = e.target;
         setForm({ ...form, [name]: value });
+        console.log(form);
     };
 
     const handleSubmit = useCallback(
@@ -69,7 +70,7 @@ const SignUp = () => {
                             }}
                         >
                             {formError?.map((e, i) => (
-                                <li key={i}>{e.message}</li>
+                                <li key={i}>{e.msg}</li>
                             ))}
                         </ul>
                     </div>
@@ -77,8 +78,8 @@ const SignUp = () => {
                     <label>Full Name</label>
                     <input
                         type="text"
-                        name="fullName"
-                        value={form.fullName}
+                        name="name"
+                        value={form.name}
                         onChange={handleChange}
                         disabled={loading}
                         required

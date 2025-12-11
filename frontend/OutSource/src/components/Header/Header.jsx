@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import styles from "./Header.module.css";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
@@ -54,11 +54,25 @@ function Nav({ selectedRoute }) {
 }
 
 export default function Header({ showLinks = true }) {
+    const navigate = useNavigate();
     const { user } = useContext(AuthContext);
+
+    function logout() {
+        fetch("http://localhost:3000/users/logout", {
+            method: "POST",
+            credentials: "include",
+        });
+    }
+
     console.log("the user is:", user);
     return (
         <header className={styles.root}>
-            <p>Signed in as: {user ? user.name : null}</p>
+            <p>
+                Signed in as: {user ? user.name : "nobody"}{" "}
+                <a href="#" onClick={logout}>
+                    (sign out)
+                </a>{" "}
+            </p>
             <h1 className="title">OutSource</h1>
             <p className={styles.subtitle}>
                 Hire talent. Get hired. All in one place.
