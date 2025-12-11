@@ -80,14 +80,12 @@ export default function Freelancers() {
                     data.map((freelancer) => {
                         return (
                             <div
+                                key={freelancer._id}
                                 onClick={() =>
                                     navigate("/freelancers/" + freelancer._id)
                                 }
                             >
-                                <FreelancerCard
-                                    key={freelancer._id}
-                                    freelancer={freelancer}
-                                />
+                                <FreelancerCard freelancer={freelancer} />
                             </div>
                         );
                     })}

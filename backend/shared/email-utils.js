@@ -1,15 +1,18 @@
 const { google } = require("googleapis");
-// Import and configure the 'dotenv' package at the top of server.js to load environment variables.
-const path = require("path");
-console.log({ path: path.resolve(__dirname + "/../.env") });
-console.log(process.env.TOKEN_SECRET);
-console.log(process.env.GOOGLE_client_secret);
 
 const CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
 const CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
 const REFRESH_TOKEN = process.env.GOOGLE_REFRESH_TOKEN;
 const SENDER_EMAIL = process.env.GOOGLE_SENDER_EMAIL;
-const REDIRECT_URI = "http://localhost:3000/google/oauth/callback";
+
+function getRedirectBase() {
+    if (process.env.ENV === "prod") {
+        return "https://" + process.env.HOSTNAME;
+    } else {
+        return "http://" + process.env.HOSTNAME + ":" + process.env.PORT;
+    }
+}
+const REDIRECT_URI = `${getRedirectBase()}/google/oauth/callback`;
 
 // MUST include redirect URI
 const oAuth2Client = new google.auth.OAuth2(

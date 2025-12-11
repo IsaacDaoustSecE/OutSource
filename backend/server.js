@@ -14,14 +14,14 @@ const { messagesRoute } = require("./modules/messages/messages-routes");
 const { ordersRoute } = require("./modules/orders/orders-routes");
 const { oauthRoutes } = require("./modules/auth/GoogAuth-routes");
 
-const port = 3000;
-const hostname = "localhost";
+const port = process.env.PORT;
+const hostname = process.env.HOSTNAME;
 
 const server = express();
 
 server.use(
     cors({
-        origin: "http://localhost:5173",
+        origin: process.env.FRONTEND_ORIGIN,
         credentials: true,
     })
 );
