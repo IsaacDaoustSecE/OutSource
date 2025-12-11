@@ -1,4 +1,3 @@
-import drawing from "../assets/drawing.png";
 import useScroll from "../useScroll";
 
 export function Warren() {
@@ -7,7 +6,7 @@ export function Warren() {
     return (
         <div className="right-section">
             <img
-                src={drawing}
+                src={"/warren.png"}
                 alt="drawing"
                 style={{
                     transform: `translateY(${scrollPosition}px)`,
