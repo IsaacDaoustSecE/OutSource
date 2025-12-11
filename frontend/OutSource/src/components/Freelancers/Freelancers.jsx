@@ -14,19 +14,14 @@ export function FreelancerCard({ freelancer }) {
             headerLeft={freelancer?.user?.name}
             headerRight={freelancer.field}
             text={freelancer.bio}
-            footerLeft={
-                <span>
-                    Estimated duration: {freelancer.expected_duration_days}{" "}
-                    day(s)
-                </span>
-            }
+            footerLeft={<span>{freelancer.skills}</span>}
             footerRight={<span>Order</span>}
         />
     );
 }
 
 export default function Freelancers() {
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
 
     // const [form, setForm] = useState({
     //     fullName: "",
@@ -84,7 +79,11 @@ export default function Freelancers() {
                 {data &&
                     data.map((freelancer) => {
                         return (
-                            <div>
+                            <div
+                                onClick={() =>
+                                    navigate("/freelancers/" + freelancer._id)
+                                }
+                            >
                                 <FreelancerCard
                                     key={freelancer._id}
                                     freelancer={freelancer}

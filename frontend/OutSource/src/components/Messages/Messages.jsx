@@ -11,9 +11,9 @@ import { AuthContext } from "../../AuthContext.js";
 import { useContext } from "react";
 
 export default function Messages() {
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
 
-    // const user = useContext(AuthContext);
+    const { user } = useContext(AuthContext);
 
     // const [form, setForm] = useState({
     //     fullName: "",
@@ -22,11 +22,16 @@ export default function Messages() {
     // });
 
     useEffect(() => {
+        if (!user) {
+            navigate("/login");
+            return;
+        }
         document.title = "Your Messages";
-    }, []);
+    }, [user, navigate]);
 
     // TODO: Replace with user's id from JWT
-    const id = "693628716344bde4f9920cca";
+    console.log("messages user:", user);
+    const id = user?._id;
 
     const { loading, data, error, formError, refetch } = useApi(
         "/messages/user/" + id,
@@ -71,7 +76,7 @@ export default function Messages() {
                 <Header />
 
                 <h2>Messages</h2>
-                {data &&
+                {data && data.length ? (
                     data.map((message) => {
                         return (
                             <Message
@@ -82,7 +87,10 @@ export default function Messages() {
                                 date={new Date(message.createdAt)}
                             />
                         );
-                    })}
+                    })
+                ) : (
+                    <span>You don't have any messages...</span>
+                )}
             </div>
 
             <Warren />

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import drawing from "../../assets/drawing.png";
 import "./Home.css";
 import { FreelancerCard } from "../Freelancers/Freelancers";
@@ -12,6 +12,7 @@ const BASE = "http://localhost:3000";
 export default function Home() {
     const [jobs, setJobs] = useState([]);
     const [freelancers, setFreelancers] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         document.title = "OutSource";
@@ -44,7 +45,7 @@ export default function Home() {
 
                 <SectionTitle
                     title="Latest Jobs"
-                    time="Updated maybe 30 mins ago"
+                    time={`Showing ${jobs.length} job(s)`}
                 />
 
                 {jobs.map((job) => (
@@ -54,15 +55,19 @@ export default function Home() {
                 <div style={{ marginTop: "40px" }}>
                     <SectionTitle
                         title="Latest Freelancers"
-                        time="Updated idk probably 6 mins"
+                        time={`Showing ${freelancers.length} freelancer(s)`}
                     />
                 </div>
 
                 {freelancers.map((freelancer) => (
-                    <FreelancerCard
+                    <div
                         key={freelancer._id}
-                        freelancer={freelancer}
-                    />
+                        onClick={() =>
+                            navigate("/freelancers/" + freelancer._id)
+                        }
+                    >
+                        <FreelancerCard freelancer={freelancer} />
+                    </div>
                 ))}
             </div>
 

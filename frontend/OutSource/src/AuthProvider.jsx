@@ -25,7 +25,7 @@ export const AuthProvider = ({ children }) => {
         } else if (data && onUserPage) {
             navigate("/");
         }
-    });
+    }, [data, navigate, location]);
 
     return (
         <AuthContext.Provider

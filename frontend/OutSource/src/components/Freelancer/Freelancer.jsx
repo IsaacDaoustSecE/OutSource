@@ -12,7 +12,7 @@ import { Job } from "../Jobs/Jobs.jsx";
 export default function Freelancer() {
     const location = useLocation();
 
-    const id = location.split("/")[1];
+    const id = location.pathname.split("/")[2];
 
     const { data, loading } = useApi("/freelancers/" + id, {
         method: "GET",
@@ -32,7 +32,7 @@ export default function Freelancer() {
                 <div className="JobPost-container">
                     <button
                         type="submit"
-                        className="JobPost-btn"
+                        className="login-btn"
                         disabled={loading}
                         onClick={() => navigate("/jobposting")}
                     >

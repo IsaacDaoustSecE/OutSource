@@ -30,6 +30,7 @@ freelancersRoute.get("/freelancers/:id", async (req, res) => {
             res.status(200).json(maybeFreelancer);
         }
     } catch (e) {
+        console.error(e);
         res.status(500).send("Unable to get Freelancer by id");
     }
 });
