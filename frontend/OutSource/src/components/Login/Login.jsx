@@ -2,7 +2,7 @@ import { useState, useCallback, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import useApi from "../../shared/useapi";
 import "./Login.css";
-import drawing from "../../assets/drawing.png";
+import { Warren } from "../Warren";
 
 const Login = () => {
     const navigate = useNavigate();
@@ -42,7 +42,7 @@ const Login = () => {
     );
 
     return (
-        <div className="login-container">
+        <div className="content-container">
             <div className="left-section">
                 <h1 className="title">OutSource</h1>
                 <p className="subtitle">
@@ -95,23 +95,21 @@ const Login = () => {
                     >
                         {loading ? "Logging in..." : "Login"}
                     </button>
+                    <button
+                        type="submit"
+                        className="login-btn"
+                        disabled={loading}
+                        onClick={() => navigate("/signup")}
+                        style={{ marginLeft: "1rem" }}
+                    >
+                        {loading
+                            ? "Going to Sign Up Page"
+                            : "Don't have an account? Sign Up!"}
+                    </button>
                 </form>
             </div>
-            <div className="SignUp-container">
-                <button
-                    type="submit"
-                    className="SignUp-btn"
-                    disabled={loading}
-                    onClick={() => navigate("/signup")}
-                >
-                    {loading
-                        ? "Going to Sign Up Page"
-                        : "don't have an account? Sign Up!"}
-                </button>
-            </div>
-
             <div className="right-section">
-                <img src={drawing} alt="drawing" />
+                <Warren />
             </div>
         </div>
     );
