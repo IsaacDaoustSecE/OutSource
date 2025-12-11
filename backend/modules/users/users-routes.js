@@ -80,13 +80,13 @@ usersRoute.post("/users/login", loginRules, async (req, res) => {
     if (foundUser.emailVerified) {
         // generate access token
         const token = encodeToken(foundUser);
-        res.cookie("Authorization", "Bearer " + token, {
-            httpOnly: true,
-            secure: process.env.ENV === "prod" ? true : false,
-            sameSite: process.env.ENV === "prod" ? "None" : "Lax",
-            domain: process.env.ENV === "prod" ? "vercel.app" : undefined,
-            path: "/",
-        });
+        // res.cookie("Authorization", "Bearer " + token, {
+        //     httpOnly: true,
+        //     secure: process.env.ENV === "prod" ? true : false,
+        //     sameSite: process.env.ENV === "prod" ? "None" : "Lax",
+        //     domain: process.env.ENV === "prod" ? "vercel.app" : undefined,
+        //     path: "/",
+        // });
         return res.json({ user: foundUser, token });
     }
 
@@ -118,10 +118,10 @@ usersRoute.post("/users/login", loginRules, async (req, res) => {
     }
 });
 
-usersRoute.post("/users/logout", async (req, res) => {
-    res.clearCookie("Authorization");
-    res.json({ success: true });
-});
+// usersRoute.post("/users/logout", async (req, res) => {
+//     res.clearCookie("Authorization");
+//     res.json({ success: true });
+// });
 
 /**
  * Verify Login Route
@@ -148,13 +148,13 @@ usersRoute.post("/users/verify-login", verifyLoginRules, async (req, res) => {
 
     // generate access token
     const token = encodeToken(user);
-    res.cookie("Authorization", "Bearer " + token, {
-        httpOnly: true,
-        secure: process.env.ENV === "prod" ? true : false,
-        sameSite: process.env.ENV === "prod" ? "None" : "Lax",
-        domain: process.env.ENV === "prod" ? "vercel.app" : undefined,
-        path: "/",
-    });
+    // res.cookie("Authorization", "Bearer " + token, {
+    //     httpOnly: true,
+    //     secure: process.env.ENV === "prod" ? true : false,
+    //     sameSite: process.env.ENV === "prod" ? "None" : "Lax",
+    //     domain: process.env.ENV === "prod" ? "vercel.app" : undefined,
+    //     path: "/",
+    // });
     res.json({ user, token });
 });
 
