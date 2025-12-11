@@ -52,11 +52,10 @@ const OTP = () => {
 
             if (res.ok) {
                 const data = await res.json();
-                // Save token if needed
-                localStorage.setItem("token", data.token);
+                localStorage.setItem("auth", data.token);
 
                 // Redirect to home
-                navigate("/home");
+                navigate("/");
             } else {
                 const err = await res.json();
                 setError(err.errorMessage || "Invalid OTP");

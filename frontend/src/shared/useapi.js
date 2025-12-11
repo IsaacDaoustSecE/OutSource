@@ -27,6 +27,9 @@ const useApi = (route, options = {}, userConfig = {}) => {
                     ...options,
                     headers: {
                         "Content-Type": "application/json",
+                        Authorization:
+                            "Bearer " + localStorage.getItem("auth") ||
+                            undefined,
                         ...(options.headers || {}),
                     },
                     body: body

@@ -58,10 +58,12 @@ export default function Header({ showLinks = true }) {
     const { user } = useContext(AuthContext);
 
     function logout() {
-        fetch(`${import.meta.env.VITE_BACKEND_BASE}/users/logout`, {
-            method: "POST",
-            credentials: "include",
-        });
+        // fetch(`${import.meta.env.VITE_BACKEND_BASE}/users/logout`, {
+        //     method: "POST",
+        //     credentials: "include",
+        // });
+        localStorage.removeItem("auth");
+        navigate("/");
     }
 
     console.log("the user is:", user);

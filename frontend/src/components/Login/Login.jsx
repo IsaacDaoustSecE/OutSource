@@ -26,8 +26,9 @@ const Login = () => {
     }, []);
 
     useEffect(() => {
-        if (!data) return;
-        console.log(data);
+        console.log("the dataaaa", data);
+        if (!data?.token) return;
+        localStorage.setItem("auth", data.token);
 
         navigate("/");
     }, [data, navigate]);
