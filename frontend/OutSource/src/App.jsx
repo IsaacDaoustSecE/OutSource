@@ -15,9 +15,9 @@ import { AuthProvider } from "./AuthProvider.jsx";
 
 function App() {
     return (
-        <AuthProvider>
-            <div className={styles.app}>
-                <BrowserRouter>
+        <div className={styles.app}>
+            <BrowserRouter>
+                <AuthProvider>
                     <Routes>
                         <Route path="/" element={<Home />} />
                         <Route path="/signup" element={<SignUp />} />
@@ -30,9 +30,9 @@ function App() {
                         <Route path="/freelancers/*" element={<Freelancer />} />
                         <Route path="/jobposting" element={<JobPosting />} />
                     </Routes>
-                </BrowserRouter>
-            </div>
-        </AuthProvider>
+                </AuthProvider>
+            </BrowserRouter>
+        </div>
     );
 }
 

@@ -82,8 +82,8 @@ usersRoute.post("/users/login", loginRules, async (req, res) => {
         const token = encodeToken(foundUser);
         res.cookie("Authorization", "Bearer " + token, {
             httpOnly: true,
-            secure: true,
-            sameSite: "none",
+            secure: false,
+            sameSite: "Lax",
             path: "/",
         });
         return res.json({ user: foundUser, token });
@@ -168,17 +168,20 @@ usersRoute.get("/users", authorize(["admin"]), async (req, res) => {
 /**
  * Get logged in user details
  */
-usersRoute.get("/users/me", authorize(["admin", "user"]), async (req, res) => {
-    const userId = req.user.id;
+usersRoute.get("/users/me", authorize(["admin"]), async (req, res) => {
+    const userId = req.user?.id;
     console.log("me id:", userId, req.cookies);
+    if (!userId) {
+        return res.json(null);
+    }
 
-    const foundUser = await UserModel.findById(userId);
+    const foundUser = await UserModel.findById(userId).lean();
     if (!foundUser) {
         return res
             .status(404)
             .json({ errorMessage: "Unable to get account details" });
     }
-    res.json(foundUser);
+    res.json({ ...foundUser, password: undefined });
 });
 
 /**

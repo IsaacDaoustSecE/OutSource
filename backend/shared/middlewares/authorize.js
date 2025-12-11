@@ -23,6 +23,8 @@ function authorize(requiredRoles = ["user"]) {
             const encoded = req.cookies["Authorization"];
             const decoded = decodeToken(encoded);
 
+            console.log("DECODED", decoded);
+
             if (!decoded || !decoded.role) {
                 return res.status(401).json({
                     errorMessage:

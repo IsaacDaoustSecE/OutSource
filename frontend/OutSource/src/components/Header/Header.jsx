@@ -55,6 +55,7 @@ function Nav({ selectedRoute }) {
 
 export default function Header({ showLinks = true }) {
     const { user } = useContext(AuthContext);
+    console.log("the user is:", user);
     return (
         <header className={styles.root}>
             <p>Signed in as: {user ? user.name : null}</p>

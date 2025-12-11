@@ -25,7 +25,7 @@ const Login = () => {
         if (!data) return;
         console.log(data);
 
-        navigate("/Home");
+        navigate("/");
     }, [data, navigate]);
 
     const handleChange = (e) => {

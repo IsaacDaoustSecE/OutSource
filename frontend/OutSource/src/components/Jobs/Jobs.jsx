@@ -26,7 +26,6 @@ import useApi from "../../shared/useapi.js";
 import Header from "../Header/Header.jsx";
 
 export function Job({ job }) {
-    console.log(job);
     return (
         <Card
             headerLeft={job.title}
