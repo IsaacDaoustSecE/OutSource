@@ -2,7 +2,7 @@ import { useState, useCallback, useEffect } from "react";
 
 const DEFAULT_CONFIG = {
     auto: true,
-    baseurl: import.meta.env.VITE_BACKEND_API_URL || "http://localhost:3000",
+    baseurl: import.meta.env.VITE_BACKEND_BASE,
 };
 
 const useApi = (route, options = {}, userConfig = {}) => {

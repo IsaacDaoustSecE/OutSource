@@ -38,11 +38,14 @@ const JobPosting = () => {
                 expected_duration_days: Number(form.expected_duration_days),
             };
 
-            const response = await fetch("http://localhost:3000/jobs", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(payload),
-            });
+            const response = await fetch(
+                `${import.meta.env.VITE_BACKEND_BASE}/jobs`,
+                {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(payload),
+                }
+            );
 
             if (!response.ok) {
                 const data = await response.json();

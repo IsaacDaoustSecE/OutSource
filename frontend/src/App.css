@@ -17,7 +17,7 @@ body {
     justify-content: center;
     background: #4c2719;
     width: 100%;
-    min-height: 100vh;
+    /* min-height: 100vh; */
     padding: 0 40px;
     /* gap: 80px; */
 }

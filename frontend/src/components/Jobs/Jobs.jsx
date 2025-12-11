@@ -2,26 +2,8 @@ import styles from "./Jobs.module.css";
 import Card from "../Card/Card.jsx";
 import { Warren } from "../Warren.jsx";
 
-// useEffect(() => {
-//     fetch("http://localhost:3000/messages")
-//         .then((response) => {
-//             if (!response.ok) {
-//                 throw new Error("Network response was not ok");
-//             }
-//             return response.json();
-//         })
-//         .then((data) => {
-//             setFetchedProducts(data);
-//         })
-//         .catch((error) => {
-//             console.error("Error fetching messages:", error);
-//         })
-//         .finally(() => {});
-// }, []);
-
-import { useState, useEffect, useCallback } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import drawing from "../../assets/drawing.png";
 import useApi from "../../shared/useapi.js";
 import Header from "../Header/Header.jsx";
 

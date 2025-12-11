@@ -58,7 +58,7 @@ export default function Header({ showLinks = true }) {
     const { user } = useContext(AuthContext);
 
     function logout() {
-        fetch("http://localhost:3000/users/logout", {
+        fetch(`${import.meta.env.VITE_BACKEND_BASE}/users/logout`, {
             method: "POST",
             credentials: "include",
         });

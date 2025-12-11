@@ -42,7 +42,7 @@ const OTP = () => {
     const verifyOTP = async (otp) => {
         try {
             const res = await fetch(
-                "http://localhost:3000/users/verify-login",
+                `${import.meta.env.VITE_BACKEND_BASE}/users/verify-login`,
                 {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
@@ -72,7 +72,7 @@ const OTP = () => {
 
     const resendCode = async () => {
         try {
-            await fetch("http://localhost:3000/users/login", {
+            await fetch(`${import.meta.env.VITE_BACKEND_BASE}/users/login`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ email }),

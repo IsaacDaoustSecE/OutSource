@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import drawing from "../../assets/drawing.png";
 import "./Home.css";
 import { FreelancerCard } from "../Freelancers/Freelancers";
 import { Job } from "../Jobs/Jobs";
 import Header from "../Header/Header";
 import { Warren } from "../Warren";
 
-const BASE = "http://localhost:3000";
+const BASE = import.meta.env.VITE_BACKEND_BASE;
 
 export default function Home() {
     const [jobs, setJobs] = useState([]);
