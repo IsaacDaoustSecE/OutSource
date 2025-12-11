@@ -19,15 +19,16 @@ function App() {
             <div className={styles.app}>
                 <BrowserRouter>
                     <Routes>
-                        <Route path="/" element={<SignUp />} />
-                        <Route path="/Login" element={<Login />} />
+                        <Route path="/" element={<Home />} />
+                        <Route path="/signup" element={<SignUp />} />
+                        <Route path="/login" element={<Login />} />
                         <Route path="/home" element={<Home />} />
                         <Route path="/otp" element={<OTP />} />
                         <Route path="/messages" element={<Messages />} />
                         <Route path="/jobs" element={<Jobs />} />
                         <Route path="/freelancers" element={<Freelancers />} />
                         <Route path="/freelancers/*" element={<Freelancer />} />
-                        <Route path="/JobPosting" element={<JobPosting />} />
+                        <Route path="/jobposting" element={<JobPosting />} />
                     </Routes>
                 </BrowserRouter>
             </div>

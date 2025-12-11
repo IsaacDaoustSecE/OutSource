@@ -118,7 +118,7 @@ const SignUp = () => {
                             type="submit"
                             className="Login-btn"
                             disabled={loading}
-                            onClick={() => navigate("/Login")}
+                            onClick={() => navigate("/login")}
                         >
                             {loading
                                 ? "Going to Login Page"

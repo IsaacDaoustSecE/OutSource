@@ -80,10 +80,12 @@ export default function Freelancers() {
                 {data &&
                     data.map((freelancer) => {
                         return (
-                            <FreelancerCard
-                                key={freelancer._id}
-                                freelancer={freelancer}
-                            />
+                            <div>
+                                <FreelancerCard
+                                    key={freelancer._id}
+                                    freelancer={freelancer}
+                                />
+                            </div>
                         );
                     })}
             </div>

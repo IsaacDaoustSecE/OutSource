@@ -46,7 +46,7 @@ const JobPosting = () => {
                 return;
             }
 
-            navigate("/Home");
+            navigate("/home");
         } catch (err) {
             console.error("Submission failed:", err);
             setError("Submission failed. Please try again.");
@@ -105,8 +105,14 @@ const JobPosting = () => {
                     />
 
                     <div className="Submit-container">
-                        <button type="submit" className="Submit-btn" disabled={loading}>
-                            {loading ? "Submitting Posting..." : "Submit Posting"}
+                        <button
+                            type="submit"
+                            className="Submit-btn"
+                            disabled={loading}
+                        >
+                            {loading
+                                ? "Submitting Posting..."
+                                : "Submit Posting"}
                         </button>
                     </div>
                 </form>

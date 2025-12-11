@@ -102,7 +102,7 @@ const Login = () => {
                     type="submit"
                     className="SignUp-btn"
                     disabled={loading}
-                    onClick={() => navigate("/SignUp")}
+                    onClick={() => navigate("/signup")}
                 >
                     {loading
                         ? "Going to Sign Up Page"
