@@ -21,6 +21,10 @@ export default function Messages() {
     //     password: "",
     // });
 
+    useEffect(() => {
+        document.title = "Your Messages";
+    }, []);
+
     // TODO: Replace with user's id from JWT
     const id = "693628716344bde4f9920cca";
 

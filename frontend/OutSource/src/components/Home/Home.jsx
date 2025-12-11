@@ -14,6 +14,10 @@ export default function Home() {
     const [freelancers, setFreelancers] = useState([]);
 
     useEffect(() => {
+        document.title = "OutSource";
+    }, []);
+
+    useEffect(() => {
         async function fetchData() {
             try {
                 const initialJobs = await fetch(BASE + "/jobs").then((res) =>

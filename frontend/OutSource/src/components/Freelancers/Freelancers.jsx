@@ -34,6 +34,10 @@ export default function Freelancers() {
     //     password: "",
     // });
 
+    useEffect(() => {
+        document.title = "All Freelancers";
+    }, []);
+
     const { loading, data, error, formError, refetch } = useApi(
         "/freelancers",
         {

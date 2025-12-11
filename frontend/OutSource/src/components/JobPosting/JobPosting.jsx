@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Warren } from "../Warren.jsx";
 import "./JobPosting.css";
+import { useEffect } from "react";
 
 const JobPosting = () => {
     const navigate = useNavigate();
@@ -15,6 +16,10 @@ const JobPosting = () => {
 
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+
+    useEffect(() => {
+        document.title = "Create a New Job";
+    }, []);
 
     const handleChange = (e) => {
         const { name, value } = e.target;

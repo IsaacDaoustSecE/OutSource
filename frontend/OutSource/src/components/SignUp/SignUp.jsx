@@ -14,6 +14,10 @@ const SignUp = () => {
         password: "",
     });
 
+    useEffect(() => {
+        document.title = "Sign Up";
+    }, []);
+
     const { loading, data, error, formError, refetch } = useApi(
         "/users/register",
         {

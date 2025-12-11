@@ -3,19 +3,25 @@ import Card from "../Card/Card.jsx";
 import { Warren } from "../Warren.jsx";
 
 import { useState, useEffect, useCallback } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import drawing from "../../assets/drawing.png";
 import useApi from "../../shared/useapi.js";
 import Header from "../Header/Header.jsx";
 import { Job } from "../Jobs/Jobs.jsx";
 
 export default function Freelancer() {
-    const id = "692d08cf3707ae2c5bf25366";
+    const location = useLocation();
+
+    const id = location.split("/")[1];
 
     const { data, loading } = useApi("/freelancers/" + id, {
         method: "GET",
         headers: { "Content-Type": "application/json" },
     });
+
+    useEffect(() => {
+        document.title = "Freelancer Profile";
+    }, []);
 
     const navigate = useNavigate();
 

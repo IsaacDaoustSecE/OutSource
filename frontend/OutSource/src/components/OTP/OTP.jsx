@@ -19,6 +19,7 @@ const OTP = () => {
     // Auto focus on first input
     useEffect(() => {
         document.getElementById("otp-0")?.focus();
+        document.title = "Enter Your OTP";
     }, []);
 
     const handleChange = (e, index) => {

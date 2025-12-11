@@ -51,6 +51,10 @@ export default function Jobs() {
     //     password: "",
     // });
 
+    useEffect(() => {
+        document.title = "All Jobs";
+    }, []);
+
     const { loading, data, error, formError, refetch } = useApi("/jobs", {
         method: "GET",
         headers: { "Content-Type": "application/json" },

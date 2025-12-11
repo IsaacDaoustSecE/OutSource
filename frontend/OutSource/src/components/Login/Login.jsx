@@ -22,6 +22,10 @@ const Login = () => {
     );
 
     useEffect(() => {
+        document.title = "Login";
+    }, []);
+
+    useEffect(() => {
         if (!data) return;
         console.log(data);
 
