@@ -1,7 +1,7 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import drawing from "../../assets/drawing.png";
 import "./OTP.css";
+import { Warren } from "../Warren";
 
 const OTP = () => {
     const location = useLocation();
@@ -118,7 +118,7 @@ const OTP = () => {
             </div>
 
             <div className="right-section">
-                <img src={drawing} alt="drawing" />
+                <Warren />
             </div>
         </div>
     );

@@ -2,9 +2,8 @@ import styles from "./Freelancer.module.css";
 import Card from "../Card/Card.jsx";
 import { Warren } from "../Warren.jsx";
 
-import { useState, useEffect, useCallback } from "react";
+import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import drawing from "../../assets/drawing.png";
 import useApi from "../../shared/useapi.js";
 import Header from "../Header/Header.jsx";
 import { Job } from "../Jobs/Jobs.jsx";
