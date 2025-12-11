@@ -10,31 +10,29 @@ import Header from "../Header/Header.jsx";
 import { Job } from "../Jobs/Jobs.jsx";
 
 export default function Freelancer() {
-
     const id = "692d08cf3707ae2c5bf25366";
 
-    const { data, loading, } = useApi("/freelancers/" + id, {
+    const { data, loading } = useApi("/freelancers/" + id, {
         method: "GET",
         headers: { "Content-Type": "application/json" },
     });
 
     const navigate = useNavigate();
 
-
     return (
         <div className="content-container">
             <div className="left-section">
                 <Header />
                 <div className="JobPost-container">
-                        <button
-                            type="submit"
-                            className="JobPost-btn"
-                            disabled={loading}
-                            onClick={() => navigate("/JobPosting")}
-                            >
-                           {loading ? "Sending Form": "Create a Job!"} 
-                        </button>
-                        </div>
+                    <button
+                        type="submit"
+                        className="JobPost-btn"
+                        disabled={loading}
+                        onClick={() => navigate("/jobposting")}
+                    >
+                        {loading ? "Sending Form" : "Create a Job!"}
+                    </button>
+                </div>
 
                 {data && (
                     <>
@@ -57,4 +55,3 @@ export default function Freelancer() {
         </div>
     );
 }
-;
