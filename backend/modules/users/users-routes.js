@@ -82,8 +82,8 @@ usersRoute.post("/users/login", loginRules, async (req, res) => {
         const token = encodeToken(foundUser);
         res.cookie("Authorization", "Bearer " + token, {
             httpOnly: true,
-            secure: false,
-            sameSite: "Lax",
+            secure: process.env.ENV === "prod" ? true : false,
+            sameSite: process.env.ENV === "prod" ? "None" : "Lax",
             path: "/",
         });
         return res.json({ user: foundUser, token });
@@ -149,8 +149,8 @@ usersRoute.post("/users/verify-login", verifyLoginRules, async (req, res) => {
     const token = encodeToken(user);
     res.cookie("Authorization", "Bearer " + token, {
         httpOnly: true,
-        secure: true,
-        sameSite: "none",
+        secure: process.env.ENV === "prod" ? true : false,
+        sameSite: process.env.ENV === "prod" ? "None" : "Lax",
         path: "/",
     });
     res.json({ user, token });
